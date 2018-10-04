@@ -26,7 +26,7 @@ namespace SupportVectorMachine
 		public int Category;
 		public int Passes;
 		public int Iterations;
-        public int MaxIterations;
+		public int MaxIterations;
 		public bool Trained;
 
 		Random random = new Random(Guid.NewGuid().GetHashCode());
@@ -191,7 +191,7 @@ namespace SupportVectorMachine
 		{
 			if (Iterations >= MaxIterations)
 				return true;
-			
+
 			// Data parameters
 			var m = Rows(dy);
 

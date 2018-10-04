@@ -867,7 +867,8 @@ public partial class MainWindow : Gtk.Window
 			}
 		}
 
-		NormalizeData(InputData, NormalizationData);
+		if (Normalize.Active)
+			NormalizeData(InputData, NormalizationData);
 
 		UpdateTextView(NormalizationView, NormalizationData);
 
@@ -920,7 +921,8 @@ public partial class MainWindow : Gtk.Window
 			}
 		}
 
-		NormalizeData(TestData, NormalizationData);
+		if (Normalize.Active)
+			NormalizeData(TestData, NormalizationData);
 
 		return true;
 	}
@@ -1217,8 +1219,8 @@ public partial class MainWindow : Gtk.Window
 
 	protected void ClearModels()
 	{
-		// Clean-Up Models
-		if (Models.Count > 0)
+        // Clean-Up Models
+        if (Models.Count > 0)
 		{
 			foreach (var model in Models)
 				model.Free();
@@ -1229,11 +1231,11 @@ public partial class MainWindow : Gtk.Window
 
 	protected void CleanShutdown()
 	{
-		// Clean-Up Routines Here
-		ManagedOps.Free(InputData, NormalizationData, OutputData, TestData);
+        // Clean-Up Routines Here
+        ManagedOps.Free(InputData, NormalizationData, OutputData, TestData);
 
-		// Clean-Up Models
-		ClearModels();
+        // Clean-Up Models
+        ClearModels();
 	}
 
 	protected void Quit()

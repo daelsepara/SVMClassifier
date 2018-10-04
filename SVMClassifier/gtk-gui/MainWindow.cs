@@ -135,6 +135,8 @@ public partial class MainWindow
 
 	private global::Gtk.Label LabelClassificationModel;
 
+	private global::Gtk.CheckButton Normalize;
+
 	private global::Gtk.Label LabelPageTraining;
 
 	private global::Gtk.Fixed LayoutPageModels;
@@ -761,9 +763,21 @@ public partial class MainWindow
 		global::Gtk.Fixed.FixedChild w56 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageTraining[this.LabelClassificationModel]));
 		w56.X = 350;
 		w56.Y = 240;
+		// Container child LayoutPageTraining.Gtk.Fixed+FixedChild
+		this.Normalize = new global::Gtk.CheckButton();
+		this.Normalize.Name = "Normalize";
+		this.Normalize.Label = global::Mono.Unix.Catalog.GetString("Normalize Data");
+		this.Normalize.Active = true;
+		this.Normalize.DrawIndicator = true;
+		this.Normalize.UseUnderline = true;
+		this.Normalize.FocusOnClick = false;
+		this.LayoutPageTraining.Add(this.Normalize);
+		global::Gtk.Fixed.FixedChild w57 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageTraining[this.Normalize]));
+		w57.X = 350;
+		w57.Y = 140;
 		this.MainNotebook.Add(this.LayoutPageTraining);
-		global::Gtk.Notebook.NotebookChild w57 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageTraining]));
-		w57.Position = 1;
+		global::Gtk.Notebook.NotebookChild w58 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageTraining]));
+		w58.Position = 1;
 		// Notebook tab
 		this.LabelPageTraining = new global::Gtk.Label();
 		this.LabelPageTraining.Name = "LabelPageTraining";
@@ -780,9 +794,9 @@ public partial class MainWindow
 		this.LabelNormalization.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Normalization</b>");
 		this.LabelNormalization.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelNormalization);
-		global::Gtk.Fixed.FixedChild w58 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelNormalization]));
-		w58.X = 350;
-		w58.Y = 270;
+		global::Gtk.Fixed.FixedChild w59 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelNormalization]));
+		w59.X = 350;
+		w59.Y = 270;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.NormalizationWindow = new global::Gtk.ScrolledWindow();
 		this.NormalizationWindow.WidthRequest = 300;
@@ -795,17 +809,17 @@ public partial class MainWindow
 		this.NormalizationView.Editable = false;
 		this.NormalizationWindow.Add(this.NormalizationView);
 		this.LayoutPageModels.Add(this.NormalizationWindow);
-		global::Gtk.Fixed.FixedChild w60 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.NormalizationWindow]));
-		w60.X = 350;
-		w60.Y = 290;
+		global::Gtk.Fixed.FixedChild w61 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.NormalizationWindow]));
+		w61.X = 350;
+		w61.Y = 290;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedParametersBox = global::Gtk.ComboBox.NewText();
 		this.TrainedParametersBox.WidthRequest = 300;
 		this.TrainedParametersBox.Name = "TrainedParametersBox";
 		this.LayoutPageModels.Add(this.TrainedParametersBox);
-		global::Gtk.Fixed.FixedChild w61 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedParametersBox]));
-		w61.X = 350;
-		w61.Y = 40;
+		global::Gtk.Fixed.FixedChild w62 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedParametersBox]));
+		w62.X = 350;
+		w62.Y = 40;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.ModelFilename = new global::Gtk.Entry();
 		this.ModelFilename.WidthRequest = 240;
@@ -813,9 +827,9 @@ public partial class MainWindow
 		this.ModelFilename.IsEditable = true;
 		this.ModelFilename.InvisibleChar = '•';
 		this.LayoutPageModels.Add(this.ModelFilename);
-		global::Gtk.Fixed.FixedChild w62 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.ModelFilename]));
-		w62.X = 20;
-		w62.Y = 290;
+		global::Gtk.Fixed.FixedChild w63 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.ModelFilename]));
+		w63.X = 20;
+		w63.Y = 290;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.ParametersWindow = new global::Gtk.ScrolledWindow();
 		this.ParametersWindow.WidthRequest = 300;
@@ -829,57 +843,57 @@ public partial class MainWindow
 		this.ParametersView.Editable = false;
 		this.ParametersWindow.Add(this.ParametersView);
 		this.LayoutPageModels.Add(this.ParametersWindow);
-		global::Gtk.Fixed.FixedChild w64 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.ParametersWindow]));
-		w64.X = 350;
-		w64.Y = 80;
+		global::Gtk.Fixed.FixedChild w65 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.ParametersWindow]));
+		w65.X = 350;
+		w65.Y = 80;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedParameters = new global::Gtk.Label();
 		this.LabelTrainedParameters.Name = "LabelTrainedParameters";
 		this.LabelTrainedParameters.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Model Parameters</b>");
 		this.LabelTrainedParameters.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedParameters);
-		global::Gtk.Fixed.FixedChild w65 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedParameters]));
-		w65.X = 350;
-		w65.Y = 20;
+		global::Gtk.Fixed.FixedChild w66 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedParameters]));
+		w66.X = 350;
+		w66.Y = 20;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.SaveTrainedModelButton = new global::Gtk.Button();
 		this.SaveTrainedModelButton.Name = "SaveTrainedModelButton";
 		this.SaveTrainedModelButton.FocusOnClick = false;
-		global::Gtk.Image w66 = new global::Gtk.Image();
-		w66.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-save", global::Gtk.IconSize.Menu);
-		this.SaveTrainedModelButton.Image = w66;
+		global::Gtk.Image w67 = new global::Gtk.Image();
+		w67.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-save", global::Gtk.IconSize.Menu);
+		this.SaveTrainedModelButton.Image = w67;
 		this.LayoutPageModels.Add(this.SaveTrainedModelButton);
-		global::Gtk.Fixed.FixedChild w67 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.SaveTrainedModelButton]));
-		w67.X = 270;
-		w67.Y = 290;
+		global::Gtk.Fixed.FixedChild w68 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.SaveTrainedModelButton]));
+		w68.X = 270;
+		w68.Y = 290;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.OpenTrainedModelButton = new global::Gtk.Button();
 		this.OpenTrainedModelButton.Name = "OpenTrainedModelButton";
 		this.OpenTrainedModelButton.FocusOnClick = false;
-		global::Gtk.Image w68 = new global::Gtk.Image();
-		w68.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-open", global::Gtk.IconSize.Menu);
-		this.OpenTrainedModelButton.Image = w68;
+		global::Gtk.Image w69 = new global::Gtk.Image();
+		w69.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-open", global::Gtk.IconSize.Menu);
+		this.OpenTrainedModelButton.Image = w69;
 		this.LayoutPageModels.Add(this.OpenTrainedModelButton);
-		global::Gtk.Fixed.FixedChild w69 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.OpenTrainedModelButton]));
-		w69.X = 300;
-		w69.Y = 290;
+		global::Gtk.Fixed.FixedChild w70 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.OpenTrainedModelButton]));
+		w70.X = 300;
+		w70.Y = 290;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedModel = new global::Gtk.Label();
 		this.LabelTrainedModel.Name = "LabelTrainedModel";
 		this.LabelTrainedModel.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Model</b>");
 		this.LabelTrainedModel.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedModel);
-		global::Gtk.Fixed.FixedChild w70 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedModel]));
-		w70.X = 20;
-		w70.Y = 20;
+		global::Gtk.Fixed.FixedChild w71 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedModel]));
+		w71.X = 20;
+		w71.Y = 20;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedModelBox = global::Gtk.ComboBox.NewText();
 		this.TrainedModelBox.WidthRequest = 150;
 		this.TrainedModelBox.Name = "TrainedModelBox";
 		this.LayoutPageModels.Add(this.TrainedModelBox);
-		global::Gtk.Fixed.FixedChild w71 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedModelBox]));
-		w71.X = 20;
-		w71.Y = 40;
+		global::Gtk.Fixed.FixedChild w72 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedModelBox]));
+		w72.X = 20;
+		w72.Y = 40;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedModelCategory = new global::Gtk.Entry();
 		this.TrainedModelCategory.WidthRequest = 150;
@@ -887,44 +901,44 @@ public partial class MainWindow
 		this.TrainedModelCategory.IsEditable = false;
 		this.TrainedModelCategory.InvisibleChar = '•';
 		this.LayoutPageModels.Add(this.TrainedModelCategory);
-		global::Gtk.Fixed.FixedChild w72 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedModelCategory]));
-		w72.X = 180;
-		w72.Y = 40;
+		global::Gtk.Fixed.FixedChild w73 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedModelCategory]));
+		w73.X = 180;
+		w73.Y = 40;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedCategory = new global::Gtk.Label();
 		this.LabelTrainedCategory.Name = "LabelTrainedCategory";
 		this.LabelTrainedCategory.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Category</b>");
 		this.LabelTrainedCategory.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedCategory);
-		global::Gtk.Fixed.FixedChild w73 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedCategory]));
-		w73.X = 180;
-		w73.Y = 20;
+		global::Gtk.Fixed.FixedChild w74 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedCategory]));
+		w74.X = 180;
+		w74.Y = 20;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedKernel = new global::Gtk.Label();
 		this.LabelTrainedKernel.Name = "LabelTrainedKernel";
 		this.LabelTrainedKernel.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Kernel</b>");
 		this.LabelTrainedKernel.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedKernel);
-		global::Gtk.Fixed.FixedChild w74 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedKernel]));
-		w74.X = 20;
-		w74.Y = 80;
+		global::Gtk.Fixed.FixedChild w75 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedKernel]));
+		w75.X = 20;
+		w75.Y = 80;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedModelKernel = global::Gtk.ComboBox.NewText();
 		this.TrainedModelKernel.WidthRequest = 150;
 		this.TrainedModelKernel.Name = "TrainedModelKernel";
 		this.LayoutPageModels.Add(this.TrainedModelKernel);
-		global::Gtk.Fixed.FixedChild w75 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedModelKernel]));
-		w75.X = 20;
-		w75.Y = 100;
+		global::Gtk.Fixed.FixedChild w76 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedModelKernel]));
+		w76.X = 20;
+		w76.Y = 100;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedRegularization = new global::Gtk.Label();
 		this.LabelTrainedRegularization.Name = "LabelTrainedRegularization";
 		this.LabelTrainedRegularization.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Regularization</b>");
 		this.LabelTrainedRegularization.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedRegularization);
-		global::Gtk.Fixed.FixedChild w76 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedRegularization]));
-		w76.X = 180;
-		w76.Y = 80;
+		global::Gtk.Fixed.FixedChild w77 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedRegularization]));
+		w77.X = 180;
+		w77.Y = 80;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedRegularization = new global::Gtk.Entry();
 		this.TrainedRegularization.WidthRequest = 150;
@@ -932,18 +946,18 @@ public partial class MainWindow
 		this.TrainedRegularization.IsEditable = false;
 		this.TrainedRegularization.InvisibleChar = '•';
 		this.LayoutPageModels.Add(this.TrainedRegularization);
-		global::Gtk.Fixed.FixedChild w77 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedRegularization]));
-		w77.X = 180;
-		w77.Y = 100;
+		global::Gtk.Fixed.FixedChild w78 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedRegularization]));
+		w78.X = 180;
+		w78.Y = 100;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedParameter1 = new global::Gtk.Label();
 		this.LabelTrainedParameter1.Name = "LabelTrainedParameter1";
 		this.LabelTrainedParameter1.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Parameter 1</b>");
 		this.LabelTrainedParameter1.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedParameter1);
-		global::Gtk.Fixed.FixedChild w78 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedParameter1]));
-		w78.X = 20;
-		w78.Y = 140;
+		global::Gtk.Fixed.FixedChild w79 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedParameter1]));
+		w79.X = 20;
+		w79.Y = 140;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedParameter1 = new global::Gtk.Entry();
 		this.TrainedParameter1.WidthRequest = 150;
@@ -951,18 +965,18 @@ public partial class MainWindow
 		this.TrainedParameter1.IsEditable = false;
 		this.TrainedParameter1.InvisibleChar = '•';
 		this.LayoutPageModels.Add(this.TrainedParameter1);
-		global::Gtk.Fixed.FixedChild w79 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedParameter1]));
-		w79.X = 20;
-		w79.Y = 160;
+		global::Gtk.Fixed.FixedChild w80 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedParameter1]));
+		w80.X = 20;
+		w80.Y = 160;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedParameter2 = new global::Gtk.Label();
 		this.LabelTrainedParameter2.Name = "LabelTrainedParameter2";
 		this.LabelTrainedParameter2.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Parameter 2</b>");
 		this.LabelTrainedParameter2.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedParameter2);
-		global::Gtk.Fixed.FixedChild w80 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedParameter2]));
-		w80.X = 20;
-		w80.Y = 200;
+		global::Gtk.Fixed.FixedChild w81 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedParameter2]));
+		w81.X = 20;
+		w81.Y = 200;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedParameter2 = new global::Gtk.Entry();
 		this.TrainedParameter2.WidthRequest = 150;
@@ -970,18 +984,18 @@ public partial class MainWindow
 		this.TrainedParameter2.IsEditable = false;
 		this.TrainedParameter2.InvisibleChar = '•';
 		this.LayoutPageModels.Add(this.TrainedParameter2);
-		global::Gtk.Fixed.FixedChild w81 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedParameter2]));
-		w81.X = 20;
-		w81.Y = 220;
+		global::Gtk.Fixed.FixedChild w82 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedParameter2]));
+		w82.X = 20;
+		w82.Y = 220;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedPasses = new global::Gtk.Label();
 		this.LabelTrainedPasses.Name = "LabelTrainedPasses";
 		this.LabelTrainedPasses.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Passes</b>");
 		this.LabelTrainedPasses.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedPasses);
-		global::Gtk.Fixed.FixedChild w82 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedPasses]));
-		w82.X = 180;
-		w82.Y = 140;
+		global::Gtk.Fixed.FixedChild w83 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedPasses]));
+		w83.X = 180;
+		w83.Y = 140;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedPasses = new global::Gtk.Entry();
 		this.TrainedPasses.WidthRequest = 150;
@@ -990,18 +1004,18 @@ public partial class MainWindow
 		this.TrainedPasses.IsEditable = false;
 		this.TrainedPasses.InvisibleChar = '•';
 		this.LayoutPageModels.Add(this.TrainedPasses);
-		global::Gtk.Fixed.FixedChild w83 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedPasses]));
-		w83.X = 180;
-		w83.Y = 160;
+		global::Gtk.Fixed.FixedChild w84 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedPasses]));
+		w84.X = 180;
+		w84.Y = 160;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedTolerance = new global::Gtk.Label();
 		this.LabelTrainedTolerance.Name = "LabelTrainedTolerance";
 		this.LabelTrainedTolerance.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Tolerance</b>");
 		this.LabelTrainedTolerance.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedTolerance);
-		global::Gtk.Fixed.FixedChild w84 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedTolerance]));
-		w84.X = 180;
-		w84.Y = 200;
+		global::Gtk.Fixed.FixedChild w85 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedTolerance]));
+		w85.X = 180;
+		w85.Y = 200;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.TrainedTolerance = new global::Gtk.Entry();
 		this.TrainedTolerance.WidthRequest = 150;
@@ -1009,21 +1023,21 @@ public partial class MainWindow
 		this.TrainedTolerance.IsEditable = false;
 		this.TrainedTolerance.InvisibleChar = '•';
 		this.LayoutPageModels.Add(this.TrainedTolerance);
-		global::Gtk.Fixed.FixedChild w85 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedTolerance]));
-		w85.X = 180;
-		w85.Y = 220;
+		global::Gtk.Fixed.FixedChild w86 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.TrainedTolerance]));
+		w86.X = 180;
+		w86.Y = 220;
 		// Container child LayoutPageModels.Gtk.Fixed+FixedChild
 		this.LabelTrainedModelsFile = new global::Gtk.Label();
 		this.LabelTrainedModelsFile.Name = "LabelTrainedModelsFile";
 		this.LabelTrainedModelsFile.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Trained models</b>");
 		this.LabelTrainedModelsFile.UseMarkup = true;
 		this.LayoutPageModels.Add(this.LabelTrainedModelsFile);
-		global::Gtk.Fixed.FixedChild w86 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedModelsFile]));
-		w86.X = 20;
-		w86.Y = 270;
+		global::Gtk.Fixed.FixedChild w87 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageModels[this.LabelTrainedModelsFile]));
+		w87.X = 20;
+		w87.Y = 270;
 		this.MainNotebook.Add(this.LayoutPageModels);
-		global::Gtk.Notebook.NotebookChild w87 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageModels]));
-		w87.Position = 2;
+		global::Gtk.Notebook.NotebookChild w88 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageModels]));
+		w88.Position = 2;
 		// Notebook tab
 		this.LabelPageModels = new global::Gtk.Label();
 		this.LabelPageModels.Name = "LabelPageModels";
@@ -1040,9 +1054,9 @@ public partial class MainWindow
 		this.LabelAbout.LabelProp = global::Mono.Unix.Catalog.GetString("<b>About Support Vector Machine Classifier</b>");
 		this.LabelAbout.UseMarkup = true;
 		this.LayoutPageAbout.Add(this.LabelAbout);
-		global::Gtk.Fixed.FixedChild w88 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelAbout]));
-		w88.X = 20;
-		w88.Y = 20;
+		global::Gtk.Fixed.FixedChild w89 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelAbout]));
+		w89.X = 20;
+		w89.Y = 20;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.AboutWindow = new global::Gtk.ScrolledWindow();
 		this.AboutWindow.WidthRequest = 300;
@@ -1071,18 +1085,18 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.AboutView.WrapMode = ((global::Gtk.WrapMode)(2));
 		this.AboutWindow.Add(this.AboutView);
 		this.LayoutPageAbout.Add(this.AboutWindow);
-		global::Gtk.Fixed.FixedChild w90 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.AboutWindow]));
-		w90.X = 20;
-		w90.Y = 40;
+		global::Gtk.Fixed.FixedChild w91 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.AboutWindow]));
+		w91.X = 20;
+		w91.Y = 40;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.LabelCredits = new global::Gtk.Label();
 		this.LabelCredits.Name = "LabelCredits";
 		this.LabelCredits.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Credits</b>");
 		this.LabelCredits.UseMarkup = true;
 		this.LayoutPageAbout.Add(this.LabelCredits);
-		global::Gtk.Fixed.FixedChild w91 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelCredits]));
-		w91.X = 20;
-		w91.Y = 260;
+		global::Gtk.Fixed.FixedChild w92 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelCredits]));
+		w92.X = 20;
+		w92.Y = 260;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.CreditsWindow = new global::Gtk.ScrolledWindow();
 		this.CreditsWindow.WidthRequest = 300;
@@ -1100,9 +1114,9 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.CreditsView.WrapMode = ((global::Gtk.WrapMode)(2));
 		this.CreditsWindow.Add(this.CreditsView);
 		this.LayoutPageAbout.Add(this.CreditsWindow);
-		global::Gtk.Fixed.FixedChild w93 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.CreditsWindow]));
-		w93.X = 20;
-		w93.Y = 280;
+		global::Gtk.Fixed.FixedChild w94 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.CreditsWindow]));
+		w94.X = 20;
+		w94.Y = 280;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.SVMClassifierImage = new global::Gtk.Image();
 		this.SVMClassifierImage.WidthRequest = 340;
@@ -1110,20 +1124,20 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.SVMClassifierImage.Name = "SVMClassifierImage";
 		this.SVMClassifierImage.Pixbuf = global::Gdk.Pixbuf.LoadFromResource("SVMClassifier.SVMDecisionBoundary.png");
 		this.LayoutPageAbout.Add(this.SVMClassifierImage);
-		global::Gtk.Fixed.FixedChild w94 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMClassifierImage]));
-		w94.X = 360;
-		w94.Y = 40;
+		global::Gtk.Fixed.FixedChild w95 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMClassifierImage]));
+		w95.X = 360;
+		w95.Y = 40;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.SVMDecisionBoundaryCaption = new global::Gtk.Label();
 		this.SVMDecisionBoundaryCaption.Name = "SVMDecisionBoundaryCaption";
 		this.SVMDecisionBoundaryCaption.LabelProp = global::Mono.Unix.Catalog.GetString("SVM decision boundary");
 		this.LayoutPageAbout.Add(this.SVMDecisionBoundaryCaption);
-		global::Gtk.Fixed.FixedChild w95 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMDecisionBoundaryCaption]));
-		w95.X = 360;
-		w95.Y = 390;
+		global::Gtk.Fixed.FixedChild w96 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMDecisionBoundaryCaption]));
+		w96.X = 360;
+		w96.Y = 390;
 		this.MainNotebook.Add(this.LayoutPageAbout);
-		global::Gtk.Notebook.NotebookChild w96 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageAbout]));
-		w96.Position = 3;
+		global::Gtk.Notebook.NotebookChild w97 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageAbout]));
+		w97.Position = 3;
 		// Notebook tab
 		this.LabelPageAbout = new global::Gtk.Label();
 		this.LabelPageAbout.Name = "LabelPageAbout";
@@ -1131,9 +1145,9 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.MainNotebook.SetTabLabel(this.LayoutPageAbout, this.LabelPageAbout);
 		this.LabelPageAbout.ShowAll();
 		this.MainLayout.Add(this.MainNotebook);
-		global::Gtk.Fixed.FixedChild w97 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.MainNotebook]));
-		w97.X = 20;
-		w97.Y = 70;
+		global::Gtk.Fixed.FixedChild w98 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.MainNotebook]));
+		w98.X = 20;
+		w98.Y = 70;
 		this.Add(this.MainLayout);
 		if ((this.Child != null))
 		{

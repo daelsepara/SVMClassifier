@@ -179,6 +179,7 @@ namespace DeepLearnCS
 				Console.WriteLine("Incompatible dimensions");
 			}
 		}
+
 		// Element by element multiplication
 		public static void Product(ManagedArray result, ManagedArray A, ManagedArray B)
 		{
