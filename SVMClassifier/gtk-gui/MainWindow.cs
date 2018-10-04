@@ -750,6 +750,7 @@ public partial class MainWindow
 		this.ClassificationToolbar = ((global::Gtk.Toolbar)(this.UIManager.GetWidget("/ClassificationToolbar")));
 		this.ClassificationToolbar.Name = "ClassificationToolbar";
 		this.ClassificationToolbar.ShowArrow = false;
+		this.ClassificationToolbar.ToolbarStyle = ((global::Gtk.ToolbarStyle)(0));
 		this.LayoutPageTraining.Add(this.ClassificationToolbar);
 		global::Gtk.Fixed.FixedChild w55 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageTraining[this.ClassificationToolbar]));
 		w55.X = 510;

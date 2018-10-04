@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
@@ -729,6 +729,7 @@
                   <widget class="Gtk.Toolbar" id="ClassificationToolbar">
                     <property name="MemberName" />
                     <property name="ShowArrow">False</property>
+                    <property name="ButtonStyle">Icons</property>
                     <node name="ClassificationToolbar" type="Toolbar">
                       <node type="Toolitem" action="ClassifyButton" />
                       <node type="Toolitem" action="ClassifyAllButton" />
