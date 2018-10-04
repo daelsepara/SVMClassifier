@@ -82,6 +82,9 @@
     <Compile Include="KernelClass.cs" />
     <Compile Include="ModelJSON.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="Boundary.cs" />
+    <Compile Include="Conrec.cs" />
+    <Compile Include="Common.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

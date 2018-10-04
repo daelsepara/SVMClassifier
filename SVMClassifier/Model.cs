@@ -80,8 +80,8 @@ namespace SupportVectorMachine
 			dx = new ManagedArray(x);
 			dy = new ManagedArray(y);
 
-			ManagedOps.Copy2D(dx, x, 0, 0);
-			ManagedOps.Copy2D(dy, y, 0, 0);
+			ManagedOps.Copy2DOffsetReverse(dx, x, 0, 0);
+			ManagedOps.Copy2DOffsetReverse(dy, y, 0, 0);
 
 			ktype = kernel;
 
@@ -97,7 +97,7 @@ namespace SupportVectorMachine
 			ManagedOps.Free(K, kparam, E, alpha);
 
 			kparam = new ManagedArray(param);
-			ManagedOps.Copy2D(kparam, param, 0, 0);
+			ManagedOps.Copy2DOffsetReverse(kparam, param, 0, 0);
 
 			// Variables
 			alpha = new ManagedArray(1, m);
@@ -163,10 +163,11 @@ namespace SupportVectorMachine
 
 				for (var i = 0; i < m; i++)
 				{
+					ManagedOps.Copy2DOffsetReverse(Xi, dx, 0, i);
+
 					for (var j = 0; j < m; j++)
 					{
-						ManagedOps.Copy2D(Xi, dx, 0, i);
-						ManagedOps.Copy2D(Xj, dx, 0, j);
+						ManagedOps.Copy2DOffsetReverse(Xj, dx, 0, j);
 
 						K[j, i] = KernelFunction.Run(kernel, Xi, Xj, kparam);
 
@@ -310,6 +311,10 @@ namespace SupportVectorMachine
 			{
 				Iterations++;
 			}
+			else
+			{
+				Iterations = 0;
+			}
 
 			return Iterations >= MaxIterations;
 		}
@@ -357,7 +362,7 @@ namespace SupportVectorMachine
 
 			B = b;
 			Passes = Iterations;
-			ManagedOps.Copy2D(KernelParam, kparam, 0, 0);
+			ManagedOps.Copy2DOffsetReverse(KernelParam, kparam, 0, 0);
 			Type = ktype;
 
 			var axy = ManagedMatrix.BSXMUL(alpha, dy);
@@ -427,7 +432,7 @@ namespace SupportVectorMachine
 				}
 				else
 				{
-					ManagedOps.Copy2D(x, input, 0, 0);
+					ManagedOps.Copy2DOffsetReverse(x, input, 0, 0);
 				}
 
 				var m = Rows(x);
@@ -484,7 +489,7 @@ namespace SupportVectorMachine
 
 					var p = ManagedMatrix.RowSums(Kernel);
 
-					ManagedOps.Copy2D(predictions, p, 0, 0);
+					ManagedOps.Copy2DOffsetReverse(predictions, p, 0, 0);
 					ManagedMatrix.Add(predictions, B);
 
 					ManagedOps.Free(pX1, pX2, rX2, X1, X2, tempK, temp1, temp2, tX, tY, tA, tempY, tempA, Kernel, p);
@@ -498,11 +503,11 @@ namespace SupportVectorMachine
 					{
 						var prediction = 0.0;
 
+						ManagedOps.Copy2DOffsetReverse(Xi, x, 0, i);
+
 						for (var j = 0; j < Rows(ModelX); j++)
 						{
-
-							ManagedOps.Copy2D(Xi, x, 0, i);
-							ManagedOps.Copy2D(Xj, ModelX, 0, j);
+							ManagedOps.Copy2DOffsetReverse(Xj, ModelX, 0, j);
 
 							prediction += Alpha[j] * ModelY[j] * KernelFunction.Run(Type, Xi, Xj, KernelParam);
 						}

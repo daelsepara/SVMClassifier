@@ -26,7 +26,7 @@ public partial class MainWindow : Gtk.Window
 
 	String FileTraining, FileTest, FileModels;
 
-	FileChooserDialog TextLoader, JsonLoader, JsonSaver;
+	FileChooserDialog TextLoader, JsonLoader, JsonSaver, ImageSaver;
 
 	CultureInfo ci = new CultureInfo("en-us");
 
@@ -38,12 +38,15 @@ public partial class MainWindow : Gtk.Window
 
 	bool ClassifierInitialized;
 
+	string FileName;
+
 	enum Pages
 	{
 		DATA = 0,
 		TRAINING = 1,
 		MODELS = 2,
-		ABOUT = 3
+		PLOT = 3,
+		ABOUT = 4
 	};
 
 	bool Paused = true;
@@ -369,6 +372,12 @@ public partial class MainWindow : Gtk.Window
 		SaveTrainedModelButton.Sensitive = toggle;
 		OpenTrainedModelButton.Sensitive = toggle;
 		ParametersView.Sensitive = toggle;
+
+		PlotModelBox.Sensitive = toggle;
+		PlotButton.Sensitive = toggle;
+		Feature1.Sensitive = toggle;
+		Feature2.Sensitive = toggle;
+		SavePlotButton.Sensitive = toggle;
 	}
 
 	protected void InitializeUserInterface()
@@ -425,13 +434,28 @@ public partial class MainWindow : Gtk.Window
 			"Save", ResponseType.Accept
 		);
 
+		ImageSaver = new FileChooserDialog(
+			"Save Filtered Image",
+			this,
+			FileChooserAction.Save,
+			"Cancel", ResponseType.Cancel,
+			"Save", ResponseType.Accept
+		);
+
 		TextLoader.AddFilter(AddFilter("Text files (csv/txt)", "*.txt", "*.csv"));
 		JsonLoader.AddFilter(AddFilter("json", "*.json"));
 		JsonSaver.AddFilter(AddFilter("json", "*.json"));
 
+		ImageSaver.AddFilter(AddFilter("png", "*.png"));
+		ImageSaver.AddFilter(AddFilter("jpg", "*.jpg", "*.jpeg"));
+		ImageSaver.AddFilter(AddFilter("tif", "*.tif", "*.tiff"));
+		ImageSaver.AddFilter(AddFilter("bmp", "*.bmp"));
+		ImageSaver.AddFilter(AddFilter("ico", "*.ico"));
+
 		TextLoader.Filter = TextLoader.Filters[0];
 		JsonLoader.Filter = JsonLoader.Filters[0];
 		JsonSaver.Filter = JsonSaver.Filters[0];
+		ImageSaver.Filter = ImageSaver.Filters[0];
 
 		ToggleUserControls(Paused);
 
@@ -455,9 +479,23 @@ public partial class MainWindow : Gtk.Window
 		LabelTrainedParameter1.Visible = false;
 		LabelTrainedParameter2.Visible = false;
 
+		PlotImage.Pixbuf = Common.Pixbuf(PlotImage.WidthRequest, PlotImage.HeightRequest);
+
 		EnableControls();
 
 		Idle.Add(new IdleHandler(OnIdle));
+	}
+
+	protected void CopyToImage(Gtk.Image image, Pixbuf pixbuf, int OriginX, int OriginY)
+	{
+		if (pixbuf != null && image.Pixbuf != null)
+		{
+			image.Pixbuf.Fill(0);
+
+			pixbuf.CopyArea(OriginX, OriginY, Math.Min(image.WidthRequest, pixbuf.Width), Math.Min(image.HeightRequest, pixbuf.Height), image.Pixbuf, 0, 0);
+
+			image.QueueDraw();
+		}
 	}
 
 	protected void Pause()
@@ -622,6 +660,7 @@ public partial class MainWindow : Gtk.Window
 			{
 				UpdateTrainedModels(TrainedModelBox, Models);
 				UpdateTrainedModels(ClassificationModelsBox, Models);
+				UpdateTrainedModels(PlotModelBox, Models);
 
 				ResetModelKernels();
 
@@ -745,6 +784,99 @@ public partial class MainWindow : Gtk.Window
 		}
 
 		JsonSaver.Hide();
+	}
+
+	protected string GetFileName(string fullpath)
+	{
+		return System.IO.Path.GetFileNameWithoutExtension(fullpath);
+	}
+
+	protected string GetName(string fullpath)
+	{
+		return System.IO.Path.GetFileName(fullpath);
+	}
+
+	protected void SavePlot()
+	{
+		ImageSaver.Title = "Save plot";
+
+		string directory;
+
+		// Add most recent directory
+		if (!string.IsNullOrEmpty(ImageSaver.Filename))
+		{
+			directory = GetDirectory(ImageSaver.Filename);
+
+			if (Directory.Exists(directory))
+			{
+				ImageSaver.SetCurrentFolder(directory);
+			}
+		}
+
+		if (ImageSaver.Run() == (int)ResponseType.Accept)
+		{
+			if (!string.IsNullOrEmpty(ImageSaver.Filename))
+			{
+				FileName = ImageSaver.Filename;
+
+				directory = GetDirectory(FileName);
+
+				var ext = ImageSaver.Filter.Name;
+
+				var fmt = ext;
+
+				switch (ext)
+				{
+					case "jpg":
+
+						if (!FileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) && !FileName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+						{
+							FileName = String.Format("{0}.jpg", GetFileName(FileName));
+						}
+
+						fmt = "jpeg";
+
+						break;
+
+					case "tif":
+
+						if (!FileName.EndsWith(".tif", StringComparison.OrdinalIgnoreCase) && !FileName.EndsWith(".tiff", StringComparison.OrdinalIgnoreCase))
+						{
+							FileName = String.Format("{0}.tif", GetFileName(FileName));
+						}
+
+						fmt = "tiff";
+
+						break;
+
+					default:
+
+						FileName = String.Format("{0}.{1}", GetFileName(FileName), ext);
+
+						break;
+				}
+
+				if (PlotImage.Pixbuf != null)
+				{
+					FileName = GetName(FileName);
+
+					var fullpath = String.Format("{0}/{1}", directory, FileName);
+
+					try
+					{
+						PlotImage.Pixbuf.Save(fullpath, fmt);
+
+						FileName = fullpath;
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine("Error saving {0}: {1}", FileName, ex.Message);
+					}
+				}
+			}
+		}
+
+		ImageSaver.Hide();
 	}
 
 	protected void ReparentTextView(Fixed parent, ScrolledWindow window, int x, int y)
@@ -987,38 +1119,23 @@ public partial class MainWindow : Gtk.Window
 
 			for (var i = 0; i < TestData.y; i++)
 			{
-				var category = 0;
-				var prediction = 0.0;
-				var m = 0;
+				ManagedOps.Copy2DOffsetReverse(input, TestData, 0, i);
 
-				ManagedOps.Copy2D(input, TestData, 0, i);
+				var category = 0;
 
 				foreach (var model in Models)
 				{
 					if (model.Trained)
 					{
-						var p = model.Predict(input);
-						var c = model.Classify(input);
+						var c = model.Predict(input);
 
-						if (m > 0)
+						if (c[0] > 0)
 						{
-							if (p[0] > prediction)
-							{
-								prediction = p[0];
-								category = c[0];
-							}
-						}
-						else
-						{
-							prediction = p[0];
-							category = c[0];
+							category = model.Category;
 						}
 
-						ManagedOps.Free(p);
 						ManagedOps.Free(c);
 					}
-
-					m++;
 				}
 
 				if (i > 0)
@@ -1155,15 +1272,6 @@ public partial class MainWindow : Gtk.Window
 		}
 	}
 
-	protected bool GetConfirmation()
-	{
-		var confirm = Confirm.Run() == (int)ResponseType.Accept;
-
-		Confirm.Hide();
-
-		return confirm;
-	}
-
 	protected void ResetModelKernels()
 	{
 		DisableControls();
@@ -1189,6 +1297,7 @@ public partial class MainWindow : Gtk.Window
 
 		UpdateTrainedModels(TrainedModelBox, Models);
 		UpdateTrainedModels(ClassificationModelsBox, Models);
+		UpdateTrainedModels(PlotModelBox, Models);
 		UpdateKernelBox(TrainedModelKernel, new List<KernelClass>());
 
 		TrainedParametersBox.Active = -1;
@@ -1221,6 +1330,26 @@ public partial class MainWindow : Gtk.Window
 		EnableControls();
 	}
 
+	protected void PlotModels(Model model, int f1 = 0, int f2 = 1)
+	{
+		var test = TestView.Buffer.Text.Trim();
+
+		if (string.IsNullOrEmpty(test))
+			return;
+
+		if (ClassifierInitialized && SetupTestData(test) && model.Trained)
+		{
+			var pixbuf = Boundary.Plot(TestData, model, PlotImage.WidthRequest, PlotImage.HeightRequest, f1, f2);
+
+			if (pixbuf != null)
+			{
+				CopyToImage(PlotImage, pixbuf, 0, 0);
+
+				Common.Free(pixbuf);
+			}
+		}
+	}
+
 	protected void ClearModels()
 	{
 		// Clean-Up Models
@@ -1231,22 +1360,6 @@ public partial class MainWindow : Gtk.Window
 
 			Models.Clear();
 		}
-	}
-
-	protected void CleanShutdown()
-	{
-		// Clean-Up Routines Here
-		ManagedOps.Free(InputData, NormalizationData, OutputData, TestData);
-
-		// Clean-Up Models
-		ClearModels();
-	}
-
-	protected void Quit()
-	{
-		CleanShutdown();
-
-		Application.Quit();
 	}
 
 	bool OnIdle()
@@ -1291,6 +1404,7 @@ public partial class MainWindow : Gtk.Window
 					{
 						UpdateTrainedModels(TrainedModelBox, Models);
 						UpdateTrainedModels(ClassificationModelsBox, Models);
+						UpdateTrainedModels(PlotModelBox, Models);
 					}
 
 					EnableControls();
@@ -1301,6 +1415,36 @@ public partial class MainWindow : Gtk.Window
 		}
 
 		return true;
+	}
+
+	protected bool GetConfirmation()
+	{
+		var confirm = Confirm.Run() == (int)ResponseType.Accept;
+
+		Confirm.Hide();
+
+		return confirm;
+	}
+
+	protected void CleanShutdown()
+	{
+		// Clean-Up Routines Here
+		ManagedOps.Free(InputData, NormalizationData, OutputData, TestData);
+
+		Common.Free(PlotImage.Pixbuf);
+		Common.Free(PlotImage);
+
+		Boundary.Free();
+
+		// Clean-Up Models
+		ClearModels();
+	}
+
+	protected void Quit()
+	{
+		CleanShutdown();
+
+		Application.Quit();
 	}
 
 	protected void OnWindowStateEvent(object sender, WindowStateEventArgs args)
@@ -1682,5 +1826,33 @@ public partial class MainWindow : Gtk.Window
 		HideKernelParameters();
 
 		EnableControls();
+	}
+
+	protected void OnPlotButtonClicked(object sender, EventArgs e)
+	{
+		if (!Paused)
+			return;
+
+		var model = PlotModelBox.Active;
+		var feature1 = Convert.ToInt32(Feature1.Value);
+		var feature2 = Convert.ToInt32(Feature2.Value);
+		var features = Convert.ToInt32(Features.Value);
+
+		if (model >= 0 && model < Models.Count && feature1 >= 0 && feature1 < features && feature2 >= 0 && feature2 < features && feature1 != feature2)
+		{
+			ToggleUserControls(false);
+
+			PlotModels(Models[model], feature1, feature2);
+
+			ToggleUserControls(true);
+		}
+	}
+
+	protected void OnSavePlotButtonClicked(object sender, EventArgs e)
+	{
+		if (!Paused)
+			return;
+
+		SavePlot();
 	}
 }

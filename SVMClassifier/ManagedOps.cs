@@ -29,6 +29,21 @@ namespace DeepLearnCS
 			}
 		}
 
+		// Copy 2D[minx + x][miny + y]
+        public static void Copy2DOffsetReverse(ManagedArray dst, ManagedArray src, int minx, int miny)
+        {
+            if (miny >= 0 & miny < src.y & minx >= 0 & minx < src.x)
+            {
+                for (int y = 0; y < dst.y; y++)
+                {
+                    var srcoffset = (miny + y) * src.x + minx;
+                    var dstoffset = y * dst.x;
+
+                    MemCopy(dst, dstoffset, src, srcoffset, dst.x);
+                }
+            }
+        }
+
 		// Copy 2D[index_list][y]
 		public static void Copy2DX(ManagedArray dst, ManagedArray src, ManagedIntList index_list, int minx)
 		{
@@ -54,21 +69,6 @@ namespace DeepLearnCS
 					var srcoffset = y * src.x;
 
 					MemCopy(dst, dstoffset, src, srcoffset, src.x);
-				}
-			}
-		}
-
-		// Copy 2D[minx + x][miny + y]
-		public static void Copy2DOffsetReverse(ManagedArray dst, ManagedArray src, int minx, int miny)
-		{
-			if (miny >= 0 & miny < src.y & minx >= 0 & minx < src.x)
-			{
-				for (int y = 0; y < dst.y; y++)
-				{
-					var srcoffset = (miny + y) * src.x + minx;
-					var dstoffset = y * dst.x;
-
-					MemCopy(dst, dstoffset, src, srcoffset, dst.x);
 				}
 			}
 		}
