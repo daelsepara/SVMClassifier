@@ -54,6 +54,9 @@ public partial class MainWindow : Gtk.Window
 	{
 		Build();
 
+		CultureInfo.DefaultThreadCurrentCulture = ci;
+        CultureInfo.DefaultThreadCurrentUICulture = ci;
+
 		InitializeUserInterface();
 	}
 
