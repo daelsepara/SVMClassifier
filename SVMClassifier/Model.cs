@@ -108,7 +108,7 @@ namespace SupportVectorMachine
 			// Pre-compute the Kernel Matrix since our dataset is small
 			// (In practice, optimized SVM packages that handle large datasets
 			// gracefully will *not* do this)
-			if (kernel is KernelType.LINEAR)
+			if (kernel == KernelType.LINEAR)
 			{
 				// Computation for the Linear Kernel
 				// This is equivalent to computing the kernel on every pair of examples
@@ -124,7 +124,7 @@ namespace SupportVectorMachine
 
 				ManagedOps.Free(tinput);
 			}
-			else if (kernel is KernelType.GAUSSIAN)
+			else if (kernel == KernelType.GAUSSIAN)
 			{
 				// RBF Kernel
 				// This is equivalent to computing the kernel on every pair of examples

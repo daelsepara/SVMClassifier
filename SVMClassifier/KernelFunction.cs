@@ -11,7 +11,7 @@ namespace SupportVectorMachine
 		SIGMOID = 3,
 		LINEAR = 4,
 		FOURIER = 5,
-        UNKNOWN = -1
+		UNKNOWN = -1
 	};
 
 	public static class KernelFunction
@@ -68,7 +68,7 @@ namespace SupportVectorMachine
 			var x = Multiply(x1, x2);
 
 			var m = k.Length() > 0 ? k[0] : 1.0;
-            var b = k.Length() > 1 ? k[1] : 0.0;
+			var b = k.Length() > 1 ? k[1] : 0.0;
 
 			return x * m + b;
 		}
@@ -139,32 +139,32 @@ namespace SupportVectorMachine
 		{
 			var result = 0.0;
 
-			if (type is KernelType.LINEAR)
+			if (type == KernelType.LINEAR)
 			{
 				return Linear(x1, x2, k);
 			}
 
-			if (type is KernelType.GAUSSIAN)
+			if (type == KernelType.GAUSSIAN)
 			{
 				return Gaussian(x1, x2, k);
 			}
 
-			if (type is KernelType.FOURIER)
+			if (type == KernelType.FOURIER)
 			{
 				return Fourier(x1, x2, k);
 			}
 
-			if (type is KernelType.SIGMOID)
+			if (type == KernelType.SIGMOID)
 			{
 				return Sigmoid(x1, x2, k);
 			}
 
-			if (type is KernelType.RADIAL)
+			if (type == KernelType.RADIAL)
 			{
 				return Radial(x1, x2, k);
 			}
 
-			if (type is KernelType.POLYNOMIAL)
+			if (type == KernelType.POLYNOMIAL)
 			{
 				return Polynomial(x1, x2, k);
 			}
