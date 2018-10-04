@@ -770,7 +770,6 @@ public partial class MainWindow
 		this.Normalize = new global::Gtk.CheckButton();
 		this.Normalize.Name = "Normalize";
 		this.Normalize.Label = global::Mono.Unix.Catalog.GetString("Normalize Data");
-		this.Normalize.Active = true;
 		this.Normalize.DrawIndicator = true;
 		this.Normalize.UseUnderline = true;
 		this.Normalize.FocusOnClick = false;
