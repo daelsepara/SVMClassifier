@@ -430,12 +430,12 @@ public partial class MainWindow : Gtk.Window
 
 		ToggleUserControls(Paused);
 
-		Kernels.Add(new KernelClass("Polynomial", KernelType.POLYNOMIAL, new List<double> { 0.0, 2.0 }, new List<string> { "bias", "exponent" }));
-		Kernels.Add(new KernelClass("Gaussian", KernelType.GAUSSIAN, new List<double> { 0.01 }, new List<string> { "sigma" }));
-		Kernels.Add(new KernelClass("Radial", KernelType.RADIAL, new List<double> { 0.01 }, new List<string> { "sigma" }));
-		Kernels.Add(new KernelClass("Sigmoid", KernelType.SIGMOID, new List<double> { 1.0, 0.0 }, new List<string> { "slope", "intercept" }));
-		Kernels.Add(new KernelClass("Linear", KernelType.LINEAR, new List<double> { 1.0, 0.0 }, new List<string> { "slope", "intercept" }));
-		Kernels.Add(new KernelClass("Fourier", KernelType.FOURIER, new List<double> { 1.0 }, new List<string> { "scaling factor" }));
+		Kernels.Add(new KernelClass("Polynomial", KernelType.POLYNOMIAL, new List<double> { 0.0, Convert.ToDouble("2.0", ci) }, new List<string> { "bias", "exponent" }));
+		Kernels.Add(new KernelClass("Gaussian", KernelType.GAUSSIAN, new List<double> { Convert.ToDouble("0.01", ci) }, new List<string> { "sigma" }));
+		Kernels.Add(new KernelClass("Radial", KernelType.RADIAL, new List<double> { Convert.ToDouble("0.01", ci) }, new List<string> { "sigma" }));
+		Kernels.Add(new KernelClass("Sigmoid", KernelType.SIGMOID, new List<double> { Convert.ToDouble("1.0", ci), 0.0 }, new List<string> { "slope", "intercept" }));
+		Kernels.Add(new KernelClass("Linear", KernelType.LINEAR, new List<double> { Convert.ToDouble("1.0", ci), 0.0 }, new List<string> { "slope", "intercept" }));
+		Kernels.Add(new KernelClass("Fourier", KernelType.FOURIER, new List<double> { Convert.ToDouble("1.0", ci) }, new List<string> { "scaling factor" }));
 
 		DisableControls();
 
@@ -621,7 +621,7 @@ public partial class MainWindow : Gtk.Window
 					var kparams = new List<double>();
 
 					for (var i = 0; i < model.KernelParam.Length(); i++)
-						kparams.Add(model.KernelParam[i]);
+						kparams.Add(Convert.ToDouble(model.KernelParam[i], ci));
 
 					var kernel = new KernelClass(Kernels[kclass].Name, model.Type, kparams, Kernels[kclass].ParameterNames);
 
