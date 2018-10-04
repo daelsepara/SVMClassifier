@@ -337,11 +337,13 @@ public partial class MainWindow : Gtk.Window
 		AddModelButton.Sensitive = toggle;
 		SaveModelButton.Sensitive = toggle;
 		RemoveModelButton.Sensitive = toggle;
+		ClearModelsButton.Sensitive = toggle;
 
         // Training Page - Training toolbar
         RunButton.Sensitive = toggle;
 		PauseButton.Sensitive = !toggle;
 		ResetButton.Sensitive = toggle;
+		Normalize.Sensitive = toggle;
 
         // Training Page - Classification
         ClassificationView.Sensitive = toggle;
@@ -446,10 +448,7 @@ public partial class MainWindow : Gtk.Window
 		UpdateKernelBox(KernelBox, Kernels);
 		UpdateTrainedParameters(TrainedParametersBox, new List<string> { "X", "Y", "Alpha", "W", "B" });
 
-		LabelParam1.Visible = false;
-		LabelParam2.Visible = false;
-		Parameter1.Visible = false;
-		Parameter2.Visible = false;
+		HideKernelParameters();
 
 		TrainedParameter1.Visible = false;
 		TrainedParameter2.Visible = false;
@@ -553,6 +552,14 @@ public partial class MainWindow : Gtk.Window
 		{
 			Console.WriteLine("Error: {0}", ex.Message);
 		}
+	}
+
+    protected void HideKernelParameters()
+	{
+		LabelParam1.Visible = false;
+        LabelParam2.Visible = false;
+        Parameter1.Visible = false;
+        Parameter2.Visible = false;
 	}
 
 	protected void LoadTextFile(ref string FileName, string title, TextView view, Entry entry, bool isTraining = false, SpinButton counter = null)
@@ -1169,10 +1176,7 @@ public partial class MainWindow : Gtk.Window
 
 		KernelBox.Active = -1;
 
-		LabelParam1.Visible = false;
-		LabelParam2.Visible = false;
-		Parameter1.Visible = false;
-		Parameter2.Visible = false;
+		HideKernelParameters();
 
 		EnableControls();
 	}
@@ -1399,7 +1403,12 @@ public partial class MainWindow : Gtk.Window
 		{
 			TrainingProgress.Fraction = 0.0;
 
-			TrainingProgress.Text = Examples.Value > 0 ? "Setting up classifiers" : "No trianing data provided";
+			TrainingProgress.Text = Examples.Value > 0 ? "Setting up classifiers" : "No training data provided";
+
+			if (ModelKernels.Count < 1)
+			{
+				TrainingProgress.Text = "No models to train!";
+			}
 
 			SetupClassifiers();
 
@@ -1657,5 +1666,21 @@ public partial class MainWindow : Gtk.Window
 		LoadJson(ref FileModels, "Load trained models", ModelFilename);
 
 		LoadClassifier(FileModels);
+	}
+
+	protected void OnClearModelsButtonClicked(object sender, EventArgs e)
+	{
+		if (!Paused)
+			return;
+
+		DisableControls();
+
+		ResetModelKernels();
+
+		UpdateModelsBox(ModelBox, ModelKernels);
+
+		HideKernelParameters();
+
+		EnableControls();
 	}
 }

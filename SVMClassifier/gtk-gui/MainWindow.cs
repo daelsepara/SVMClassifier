@@ -25,6 +25,8 @@ public partial class MainWindow
 
 	private global::Gtk.Action ClassifyAllButton;
 
+	private global::Gtk.Action ClearModelsButton;
+
 	private global::Gtk.Fixed MainLayout;
 
 	private global::Gtk.Toolbar MainToolbar;
@@ -243,6 +245,8 @@ public partial class MainWindow
 		w1.Add(this.RemoveModelButton, null);
 		this.ClassifyAllButton = new global::Gtk.Action("ClassifyAllButton", null, global::Mono.Unix.Catalog.GetString("Classify test data using all models"), "gtk-apply");
 		w1.Add(this.ClassifyAllButton, null);
+		this.ClearModelsButton = new global::Gtk.Action("ClearModelsButton", null, global::Mono.Unix.Catalog.GetString("Remove all models"), "gtk-delete");
+		w1.Add(this.ClearModelsButton, null);
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.WidthRequest = 800;
@@ -699,9 +703,7 @@ public partial class MainWindow
 		w49.X = 180;
 		w49.Y = 220;
 		// Container child LayoutPageTraining.Gtk.Fixed+FixedChild
-		this.UIManager.AddUiFromString("<ui><toolbar name=\'ModelToolbar\'><toolitem name=\'AddModelButton\' action=\'AddModel" +
-				"Button\'/><toolitem name=\'RemoveModelButton\' action=\'RemoveModelButton\'/><toolite" +
-				"m name=\'SaveModelButton\' action=\'SaveModelButton\'/></toolbar></ui>");
+		this.UIManager.AddUiFromString(@"<ui><toolbar name='ModelToolbar'><toolitem name='AddModelButton' action='AddModelButton'/><toolitem name='RemoveModelButton' action='RemoveModelButton'/><toolitem name='SaveModelButton' action='SaveModelButton'/><toolitem name='ClearModelsButton' action='ClearModelsButton'/></toolbar></ui>");
 		this.ModelToolbar = ((global::Gtk.Toolbar)(this.UIManager.GetWidget("/ModelToolbar")));
 		this.ModelToolbar.Name = "ModelToolbar";
 		this.ModelToolbar.ShowArrow = false;
@@ -1166,6 +1168,7 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.ClassifyButton.Activated += new global::System.EventHandler(this.OnClassifyButtonClicked);
 		this.RemoveModelButton.Activated += new global::System.EventHandler(this.OnRemoveModelButton);
 		this.ClassifyAllButton.Activated += new global::System.EventHandler(this.OnClassifyAllButtonClicked);
+		this.ClearModelsButton.Activated += new global::System.EventHandler(this.OnClearModelsButtonClicked);
 		this.MainNotebook.SwitchPage += new global::Gtk.SwitchPageHandler(this.OnMainNotebookSwitchPage);
 		this.OpenTrainingButton.Clicked += new global::System.EventHandler(this.OnOpenTrainingButtonClicked);
 		this.ReloadTrainingButton.Clicked += new global::System.EventHandler(this.OnReloadTrainingButtonClicked);

@@ -78,6 +78,13 @@
         <property name="Tooltip" translatable="yes">Classify test data using all models</property>
         <signal name="Activated" handler="OnClassifyAllButtonClicked" />
       </action>
+      <action id="ClearModelsButton">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-delete</property>
+        <property name="Tooltip" translatable="yes">Remove all models</property>
+        <signal name="Activated" handler="OnClearModelsButtonClicked" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="WidthRequest">800</property>
@@ -674,6 +681,7 @@
                       <node type="Toolitem" action="AddModelButton" />
                       <node type="Toolitem" action="RemoveModelButton" />
                       <node type="Toolitem" action="SaveModelButton" />
+                      <node type="Toolitem" action="ClearModelsButton" />
                     </node>
                   </widget>
                   <packing>
