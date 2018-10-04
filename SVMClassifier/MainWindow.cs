@@ -13,14 +13,14 @@ public partial class MainWindow : Gtk.Window
 {
 	Dialog Confirm;
 
-    // User-supplied data
-    ManagedArray InputData = new ManagedArray();
+	// User-supplied data
+	ManagedArray InputData = new ManagedArray();
 	ManagedArray NormalizationData = new ManagedArray();
 	ManagedArray OutputData = new ManagedArray();
 	ManagedArray TestData = new ManagedArray();
 
-    // Models for multi-classification
-    List<Model> Models = new List<Model>();
+	// Models for multi-classification
+	List<Model> Models = new List<Model>();
 
 	List<Delimiter> Delimiters = new List<Delimiter>();
 
@@ -55,7 +55,7 @@ public partial class MainWindow : Gtk.Window
 		Build();
 
 		CultureInfo.DefaultThreadCurrentCulture = ci;
-        CultureInfo.DefaultThreadCurrentUICulture = ci;
+		CultureInfo.DefaultThreadCurrentUICulture = ci;
 
 		InitializeUserInterface();
 	}
@@ -303,8 +303,8 @@ public partial class MainWindow : Gtk.Window
 
 	protected void ToggleUserControls(bool toggle)
 	{
-        // Data Page - Training Set
-        TrainingFilename.Sensitive = toggle;
+		// Data Page - Training Set
+		TrainingFilename.Sensitive = toggle;
 		OpenTrainingButton.Sensitive = toggle;
 		ReloadTrainingButton.Sensitive = toggle;
 		TrainingView.Sensitive = toggle;
@@ -312,18 +312,18 @@ public partial class MainWindow : Gtk.Window
 		Categories.Sensitive = toggle;
 		Examples.Sensitive = toggle;
 
-        // Data Page - Test Set
-        TestFilename.Sensitive = toggle;
+		// Data Page - Test Set
+		TestFilename.Sensitive = toggle;
 		OpenTestButton.Sensitive = toggle;
 		ReloadTestButton.Sensitive = toggle;
 		TestView.Sensitive = toggle;
 		Samples.Sensitive = toggle;
 
-        // Data Page - Delimeter Box
-        DelimiterBox.Sensitive = toggle;
+		// Data Page - Delimeter Box
+		DelimiterBox.Sensitive = toggle;
 
-        // Training Page - Kernel
-        KernelBox.Sensitive = toggle;
+		// Training Page - Kernel
+		KernelBox.Sensitive = toggle;
 		Category.Sensitive = toggle;
 		KernelBox.Sensitive = toggle;
 		Parameter1.Sensitive = toggle;
@@ -332,29 +332,29 @@ public partial class MainWindow : Gtk.Window
 		Regularization.Sensitive = toggle;
 		MaxPasses.Sensitive = toggle;
 
-        // Training Page - Model
-        ModelBox.Sensitive = toggle;
+		// Training Page - Model
+		ModelBox.Sensitive = toggle;
 		AddModelButton.Sensitive = toggle;
 		SaveModelButton.Sensitive = toggle;
 		RemoveModelButton.Sensitive = toggle;
 		ClearModelsButton.Sensitive = toggle;
 
-        // Training Page - Training toolbar
-        RunButton.Sensitive = toggle;
+		// Training Page - Training toolbar
+		RunButton.Sensitive = toggle;
 		PauseButton.Sensitive = !toggle;
 		ResetButton.Sensitive = toggle;
 		Normalize.Sensitive = toggle;
 
-        // Training Page - Classification
-        ClassificationView.Sensitive = toggle;
+		// Training Page - Classification
+		ClassificationView.Sensitive = toggle;
 		ClassifyButton.Sensitive = toggle;
 		ClassifyAllButton.Sensitive = toggle;
 
-        // Models Page - Normalization
-        NormalizationView.Sensitive = toggle;
+		// Models Page - Normalization
+		NormalizationView.Sensitive = toggle;
 
-        // Models Page - Parameters
-        TrainedModelBox.Sensitive = toggle;
+		// Models Page - Parameters
+		TrainedModelBox.Sensitive = toggle;
 		TrainedModelKernel.Sensitive = toggle;
 		TrainedParameter1.Sensitive = toggle;
 		TrainedParameter2.Sensitive = toggle;
@@ -363,8 +363,8 @@ public partial class MainWindow : Gtk.Window
 		TrainedPasses.Sensitive = toggle;
 		TrainedTolerance.Sensitive = toggle;
 
-        // Models Page - Parameters display
-        TrainedParametersBox.Sensitive = toggle;
+		// Models Page - Parameters display
+		TrainedParametersBox.Sensitive = toggle;
 		ModelFilename.Sensitive = toggle;
 		SaveTrainedModelButton.Sensitive = toggle;
 		OpenTrainedModelButton.Sensitive = toggle;
@@ -435,12 +435,12 @@ public partial class MainWindow : Gtk.Window
 
 		ToggleUserControls(Paused);
 
-		Kernels.Add(new KernelClass("Polynomial", KernelType.POLYNOMIAL, new List<double> { 0.0, Convert.ToDouble("2.0", ci) }, new List<string> { "bias", "exponent" }));
-		Kernels.Add(new KernelClass("Gaussian", KernelType.GAUSSIAN, new List<double> { Convert.ToDouble("0.01", ci) }, new List<string> { "sigma" }));
-		Kernels.Add(new KernelClass("Radial", KernelType.RADIAL, new List<double> { Convert.ToDouble("0.01", ci) }, new List<string> { "sigma" }));
-		Kernels.Add(new KernelClass("Sigmoid", KernelType.SIGMOID, new List<double> { Convert.ToDouble("1.0", ci), 0.0 }, new List<string> { "slope", "intercept" }));
-		Kernels.Add(new KernelClass("Linear", KernelType.LINEAR, new List<double> { Convert.ToDouble("1.0", ci), 0.0 }, new List<string> { "slope", "intercept" }));
-		Kernels.Add(new KernelClass("Fourier", KernelType.FOURIER, new List<double> { Convert.ToDouble("1.0", ci) }, new List<string> { "scaling factor" }));
+		Kernels.Add(new KernelClass("Polynomial", KernelType.POLYNOMIAL, new List<double> { 0.0, 2.0 }, new List<string> { "bias", "exponent" }));
+		Kernels.Add(new KernelClass("Gaussian", KernelType.GAUSSIAN, new List<double> { 0.01 }, new List<string> { "sigma" }));
+		Kernels.Add(new KernelClass("Radial", KernelType.RADIAL, new List<double> { 0.01 }, new List<string> { "sigma" }));
+		Kernels.Add(new KernelClass("Sigmoid", KernelType.SIGMOID, new List<double> { 1.0, 0.0 }, new List<string> { "slope", "intercept" }));
+		Kernels.Add(new KernelClass("Linear", KernelType.LINEAR, new List<double> { 1.0, 0.0 }, new List<string> { "slope", "intercept" }));
+		Kernels.Add(new KernelClass("Fourier", KernelType.FOURIER, new List<double> { 1.0 }, new List<string> { "scaling factor" }));
 
 		DisableControls();
 
@@ -554,20 +554,20 @@ public partial class MainWindow : Gtk.Window
 		}
 	}
 
-    protected void HideKernelParameters()
+	protected void HideKernelParameters()
 	{
 		LabelParam1.Visible = false;
-        LabelParam2.Visible = false;
-        Parameter1.Visible = false;
-        Parameter2.Visible = false;
+		LabelParam2.Visible = false;
+		Parameter1.Visible = false;
+		Parameter2.Visible = false;
 	}
 
 	protected void LoadTextFile(ref string FileName, string title, TextView view, Entry entry, bool isTraining = false, SpinButton counter = null)
 	{
 		TextLoader.Title = title;
 
-        // Add most recent directory
-        if (!string.IsNullOrEmpty(TextLoader.Filename))
+		// Add most recent directory
+		if (!string.IsNullOrEmpty(TextLoader.Filename))
 		{
 			var directory = System.IO.Path.GetDirectoryName(TextLoader.Filename);
 
@@ -663,8 +663,8 @@ public partial class MainWindow : Gtk.Window
 	{
 		JsonLoader.Title = title;
 
-        // Add most recent directory
-        if (!string.IsNullOrEmpty(JsonLoader.Filename))
+		// Add most recent directory
+		if (!string.IsNullOrEmpty(JsonLoader.Filename))
 		{
 			var directory = System.IO.Path.GetDirectoryName(JsonLoader.Filename);
 
@@ -698,8 +698,8 @@ public partial class MainWindow : Gtk.Window
 
 		string directory;
 
-        // Add most recent directory
-        if (!string.IsNullOrEmpty(JsonSaver.Filename))
+		// Add most recent directory
+		if (!string.IsNullOrEmpty(JsonSaver.Filename))
 		{
 			directory = System.IO.Path.GetDirectoryName(JsonSaver.Filename);
 
@@ -1223,8 +1223,8 @@ public partial class MainWindow : Gtk.Window
 
 	protected void ClearModels()
 	{
-        // Clean-Up Models
-        if (Models.Count > 0)
+		// Clean-Up Models
+		if (Models.Count > 0)
 		{
 			foreach (var model in Models)
 				model.Free();
@@ -1235,11 +1235,11 @@ public partial class MainWindow : Gtk.Window
 
 	protected void CleanShutdown()
 	{
-        // Clean-Up Routines Here
-        ManagedOps.Free(InputData, NormalizationData, OutputData, TestData);
+		// Clean-Up Routines Here
+		ManagedOps.Free(InputData, NormalizationData, OutputData, TestData);
 
-        // Clean-Up Models
-        ClearModels();
+		// Clean-Up Models
+		ClearModels();
 	}
 
 	protected void Quit()

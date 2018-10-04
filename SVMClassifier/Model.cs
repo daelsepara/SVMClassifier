@@ -31,6 +31,8 @@ namespace SupportVectorMachine
 
 		Random random = new Random(Guid.NewGuid().GetHashCode());
 
+		readonly double Mepsilon = Math.Pow(2, -52);
+
 		// Internal variables
 		ManagedArray K;
 		ManagedArray E;
@@ -247,7 +249,7 @@ namespace SupportVectorMachine
 						H = Math.Min(C, C + alpha[j] - alpha[i]);
 					}
 
-					if (Math.Abs(L - H) <= Double.Epsilon)
+					if (Math.Abs(L - H) <= Mepsilon)
 					{
 						// continue to next i 
 						continue;
