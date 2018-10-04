@@ -185,7 +185,7 @@ public partial class MainWindow : Gtk.Window
 			if (kernel.Parameters.Count > 0 && kernel.ParameterNames.Count > 0)
 			{
 				label1.LabelProp = "<b>" + kernel.ParameterNames[0] + "</b>";
-				param1.Value = kernel.Parameters[0];
+				param1.Value = Convert.ToDouble(kernel.Parameters[0], ci);
 			}
 		}
 		else
@@ -202,7 +202,7 @@ public partial class MainWindow : Gtk.Window
 			if (kernel.Parameters.Count > 1 && kernel.ParameterNames.Count > 1)
 			{
 				label2.LabelProp = "<b>" + kernel.ParameterNames[1] + "</b>";
-				param2.Value = kernel.Parameters[1];
+				param2.Value = Convert.ToDouble(kernel.Parameters[1], ci);
 			}
 		}
 		else
@@ -257,40 +257,40 @@ public partial class MainWindow : Gtk.Window
 		{
 			case (int)KernelType.POLYNOMIAL:
 
-				kernelParams.Add(Parameter1.Value);
-				kernelParams.Add(Parameter2.Value);
+				kernelParams.Add(Convert.ToDouble(Parameter1.Value, ci));
+				kernelParams.Add(Convert.ToDouble(Parameter2.Value, ci));
 
 				break;
 
 			case (int)KernelType.GAUSSIAN:
 
-				kernelParams.Add(Parameter1.Value);
+				kernelParams.Add(Convert.ToDouble(Parameter1.Value, ci));
 
 				break;
 
 			case (int)KernelType.RADIAL:
 
-				kernelParams.Add(Parameter1.Value);
+				kernelParams.Add(Convert.ToDouble(Parameter1.Value, ci));
 
 				break;
 
 			case (int)KernelType.SIGMOID:
 
-				kernelParams.Add(Parameter1.Value);
-				kernelParams.Add(Parameter2.Value);
+				kernelParams.Add(Convert.ToDouble(Parameter1.Value, ci));
+				kernelParams.Add(Convert.ToDouble(Parameter2.Value, ci));
 
 				break;
 
 			case (int)KernelType.LINEAR:
 
-				kernelParams.Add(Parameter1.Value);
-				kernelParams.Add(Parameter2.Value);
+				kernelParams.Add(Convert.ToDouble(Parameter1.Value, ci));
+				kernelParams.Add(Convert.ToDouble(Parameter2.Value, ci));
 
 				break;
 
 			case (int)KernelType.FOURIER:
 
-				kernelParams.Add(Parameter1.Value);
+				kernelParams.Add(Convert.ToDouble(Parameter1.Value, ci));
 
 				break;
 		}
@@ -1030,7 +1030,7 @@ public partial class MainWindow : Gtk.Window
 		var kparam = new List<double>();
 
 		for (var i = 0; i < parameters.Length(); i++)
-			kparam.Add(parameters[i]);
+			kparam.Add(Convert.ToDouble(parameters[i], ci));
 
 		return kparam;
 	}
@@ -1042,7 +1042,7 @@ public partial class MainWindow : Gtk.Window
 		var parameters = kernel.Parameters.Count;
 
 		for (var i = 0; i < parameters; i++)
-			kparam[i] = kernel.Parameters[i];
+			kparam[i] = Convert.ToDouble(kernel.Parameters[i], ci);
 
 		return kparam;
 	}
@@ -1097,9 +1097,9 @@ public partial class MainWindow : Gtk.Window
 			UpdateKernelBox(TrainedModelKernel, new List<KernelClass> { kernel }, 1);
 			UpdateKernelParameters(kernel, LabelTrainedParameter1, TrainedParameter1, LabelTrainedParameter2, TrainedParameter2);
 			TrainedModelCategory.Text = Convert.ToInt32(model.Category).ToString(ci);
-			TrainedRegularization.Text = model.C.ToString("0.#####", ci);
+			TrainedRegularization.Text = model.C.ToString(ci);
 			TrainedPasses.Text = Convert.ToInt32(model.Passes).ToString(ci);
-			TrainedTolerance.Text = model.Tolerance.ToString("0.#####", ci);
+			TrainedTolerance.Text = model.Tolerance.ToString(ci);
 		}
 	}
 
@@ -1136,7 +1136,7 @@ public partial class MainWindow : Gtk.Window
 				case (int)ModelParameters.B:
 
 					ParametersView.Buffer.Clear();
-					ParametersView.Buffer.Text = model.B.ToString("0.#####", ci);
+					ParametersView.Buffer.Text = model.B.ToString(ci);
 
 					break;
 			}
