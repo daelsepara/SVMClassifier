@@ -49,6 +49,12 @@ public partial class MainWindow : Gtk.Window
 		ABOUT = 4
 	};
 
+	enum PlotTypes
+	{
+		POINTS = 0,
+		CONTOUR = 1
+	};
+
 	bool Paused = true;
 
 	Mutex Processing = new Mutex();
@@ -81,6 +87,22 @@ public partial class MainWindow : Gtk.Window
 			filter.AddPattern(pattern);
 
 		return filter;
+	}
+
+	protected void UpdatePlotTypes()
+	{
+		PlotType.Clear();
+
+		var cell = new CellRendererText();
+		PlotType.PackStart(cell, false);
+		PlotType.AddAttribute(cell, "text", 0);
+		var store = new ListStore(typeof(string));
+		PlotType.Model = store;
+
+		store.AppendValues("Test data points");
+		store.AppendValues("Decision boundaries");
+
+		PlotType.Active = 0;
 	}
 
 	protected void UpdateDelimiterBox(ComboBox combo, List<Delimiter> delimeters)
@@ -374,6 +396,7 @@ public partial class MainWindow : Gtk.Window
 		ParametersView.Sensitive = toggle;
 
 		PlotModelBox.Sensitive = toggle;
+		PlotType.Sensitive = toggle;
 		PlotButton.Sensitive = toggle;
 		Feature1.Sensitive = toggle;
 		Feature2.Sensitive = toggle;
@@ -480,6 +503,8 @@ public partial class MainWindow : Gtk.Window
 		LabelTrainedParameter2.Visible = false;
 
 		PlotImage.Pixbuf = Common.Pixbuf(PlotImage.WidthRequest, PlotImage.HeightRequest);
+
+		UpdatePlotTypes();
 
 		EnableControls();
 
@@ -1339,9 +1364,32 @@ public partial class MainWindow : Gtk.Window
 		if (string.IsNullOrEmpty(test))
 			return;
 
-		if (ClassifierInitialized && SetupTestData(test) && model.Trained)
+		var type = PlotType.Active;
+
+		if (ClassifierInitialized && SetupTestData(test) && model.Trained && type >= 0 && type < 2)
 		{
-			var pixbuf = Boundary.Contour(TestData, model, PlotImage.WidthRequest, PlotImage.HeightRequest, f1, f2);
+			Pixbuf pixbuf;
+
+			switch (type)
+			{
+				case 0:
+
+					pixbuf = Boundary.Plot(TestData, model, PlotImage.WidthRequest, PlotImage.HeightRequest, f1, f2);
+
+					break;
+
+				case 1:
+
+					pixbuf = Boundary.Contour(TestData, model, PlotImage.WidthRequest, PlotImage.HeightRequest, f1, f2);
+
+					break;
+
+				default:
+
+					pixbuf = Boundary.Plot(TestData, model, PlotImage.WidthRequest, PlotImage.HeightRequest, f1, f2);
+
+					break;
+			}
 
 			if (pixbuf != null)
 			{

@@ -221,6 +221,10 @@ public partial class MainWindow
 
 	private global::Gtk.SpinButton Feature2;
 
+	private global::Gtk.Label LabelPlotType;
+
+	private global::Gtk.ComboBox PlotType;
+
 	private global::Gtk.Label LabelPagePlot;
 
 	private global::Gtk.Fixed LayoutPageAbout;
@@ -306,7 +310,7 @@ public partial class MainWindow
 		this.MainNotebook.WidthRequest = 740;
 		this.MainNotebook.HeightRequest = 510;
 		this.MainNotebook.Name = "MainNotebook";
-		this.MainNotebook.CurrentPage = 3;
+		this.MainNotebook.CurrentPage = 0;
 		// Container child MainNotebook.Gtk.Notebook+NotebookChild
 		this.LayoutPageData = new global::Gtk.Fixed();
 		this.LayoutPageData.Name = "LayoutPageData";
@@ -1097,7 +1101,7 @@ public partial class MainWindow
 		this.LayoutPagePlot.Add(this.PlotToolbar);
 		global::Gtk.Fixed.FixedChild w90 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.PlotToolbar]));
 		w90.X = 460;
-		w90.Y = 160;
+		w90.Y = 200;
 		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
 		this.PlotModelBox = global::Gtk.ComboBox.NewText();
 		this.PlotModelBox.WidthRequest = 256;
@@ -1105,7 +1109,7 @@ public partial class MainWindow
 		this.LayoutPagePlot.Add(this.PlotModelBox);
 		global::Gtk.Fixed.FixedChild w91 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.PlotModelBox]));
 		w91.X = 460;
-		w91.Y = 60;
+		w91.Y = 100;
 		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
 		this.LabelPlotModel = new global::Gtk.Label();
 		this.LabelPlotModel.Name = "LabelPlotModel";
@@ -1114,7 +1118,7 @@ public partial class MainWindow
 		this.LayoutPagePlot.Add(this.LabelPlotModel);
 		global::Gtk.Fixed.FixedChild w92 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.LabelPlotModel]));
 		w92.X = 460;
-		w92.Y = 40;
+		w92.Y = 80;
 		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
 		this.LabelFeature1 = new global::Gtk.Label();
 		this.LabelFeature1.Name = "LabelFeature1";
@@ -1123,7 +1127,7 @@ public partial class MainWindow
 		this.LayoutPagePlot.Add(this.LabelFeature1);
 		global::Gtk.Fixed.FixedChild w93 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.LabelFeature1]));
 		w93.X = 460;
-		w93.Y = 100;
+		w93.Y = 140;
 		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
 		this.Feature1 = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.Feature1.WidthRequest = 120;
@@ -1134,7 +1138,7 @@ public partial class MainWindow
 		this.LayoutPagePlot.Add(this.Feature1);
 		global::Gtk.Fixed.FixedChild w94 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.Feature1]));
 		w94.X = 460;
-		w94.Y = 120;
+		w94.Y = 160;
 		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
 		this.LabelFeature2 = new global::Gtk.Label();
 		this.LabelFeature2.Name = "LabelFeature2";
@@ -1143,7 +1147,7 @@ public partial class MainWindow
 		this.LayoutPagePlot.Add(this.LabelFeature2);
 		global::Gtk.Fixed.FixedChild w95 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.LabelFeature2]));
 		w95.X = 600;
-		w95.Y = 100;
+		w95.Y = 140;
 		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
 		this.Feature2 = new global::Gtk.SpinButton(0D, 100D, 1D);
 		this.Feature2.WidthRequest = 120;
@@ -1155,10 +1159,27 @@ public partial class MainWindow
 		this.LayoutPagePlot.Add(this.Feature2);
 		global::Gtk.Fixed.FixedChild w96 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.Feature2]));
 		w96.X = 600;
-		w96.Y = 120;
+		w96.Y = 160;
+		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
+		this.LabelPlotType = new global::Gtk.Label();
+		this.LabelPlotType.Name = "LabelPlotType";
+		this.LabelPlotType.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Select plot type</b>");
+		this.LabelPlotType.UseMarkup = true;
+		this.LayoutPagePlot.Add(this.LabelPlotType);
+		global::Gtk.Fixed.FixedChild w97 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.LabelPlotType]));
+		w97.X = 460;
+		w97.Y = 20;
+		// Container child LayoutPagePlot.Gtk.Fixed+FixedChild
+		this.PlotType = global::Gtk.ComboBox.NewText();
+		this.PlotType.WidthRequest = 256;
+		this.PlotType.Name = "PlotType";
+		this.LayoutPagePlot.Add(this.PlotType);
+		global::Gtk.Fixed.FixedChild w98 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPagePlot[this.PlotType]));
+		w98.X = 460;
+		w98.Y = 40;
 		this.MainNotebook.Add(this.LayoutPagePlot);
-		global::Gtk.Notebook.NotebookChild w97 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPagePlot]));
-		w97.Position = 3;
+		global::Gtk.Notebook.NotebookChild w99 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPagePlot]));
+		w99.Position = 3;
 		// Notebook tab
 		this.LabelPagePlot = new global::Gtk.Label();
 		this.LabelPagePlot.Name = "LabelPagePlot";
@@ -1175,9 +1196,9 @@ public partial class MainWindow
 		this.LabelAbout.LabelProp = global::Mono.Unix.Catalog.GetString("<b>About Support Vector Machine Classifier</b>");
 		this.LabelAbout.UseMarkup = true;
 		this.LayoutPageAbout.Add(this.LabelAbout);
-		global::Gtk.Fixed.FixedChild w98 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelAbout]));
-		w98.X = 20;
-		w98.Y = 20;
+		global::Gtk.Fixed.FixedChild w100 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelAbout]));
+		w100.X = 20;
+		w100.Y = 20;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.AboutWindow = new global::Gtk.ScrolledWindow();
 		this.AboutWindow.WidthRequest = 300;
@@ -1206,18 +1227,18 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.AboutView.WrapMode = ((global::Gtk.WrapMode)(2));
 		this.AboutWindow.Add(this.AboutView);
 		this.LayoutPageAbout.Add(this.AboutWindow);
-		global::Gtk.Fixed.FixedChild w100 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.AboutWindow]));
-		w100.X = 20;
-		w100.Y = 40;
+		global::Gtk.Fixed.FixedChild w102 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.AboutWindow]));
+		w102.X = 20;
+		w102.Y = 40;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.LabelCredits = new global::Gtk.Label();
 		this.LabelCredits.Name = "LabelCredits";
 		this.LabelCredits.LabelProp = global::Mono.Unix.Catalog.GetString("<b>Credits</b>");
 		this.LabelCredits.UseMarkup = true;
 		this.LayoutPageAbout.Add(this.LabelCredits);
-		global::Gtk.Fixed.FixedChild w101 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelCredits]));
-		w101.X = 20;
-		w101.Y = 260;
+		global::Gtk.Fixed.FixedChild w103 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.LabelCredits]));
+		w103.X = 20;
+		w103.Y = 260;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.CreditsWindow = new global::Gtk.ScrolledWindow();
 		this.CreditsWindow.WidthRequest = 300;
@@ -1235,9 +1256,9 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.CreditsView.WrapMode = ((global::Gtk.WrapMode)(2));
 		this.CreditsWindow.Add(this.CreditsView);
 		this.LayoutPageAbout.Add(this.CreditsWindow);
-		global::Gtk.Fixed.FixedChild w103 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.CreditsWindow]));
-		w103.X = 20;
-		w103.Y = 280;
+		global::Gtk.Fixed.FixedChild w105 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.CreditsWindow]));
+		w105.X = 20;
+		w105.Y = 280;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.SVMClassifierImage = new global::Gtk.Image();
 		this.SVMClassifierImage.WidthRequest = 340;
@@ -1245,20 +1266,20 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.SVMClassifierImage.Name = "SVMClassifierImage";
 		this.SVMClassifierImage.Pixbuf = global::Gdk.Pixbuf.LoadFromResource("SVMClassifier.SVMDecisionBoundary.png");
 		this.LayoutPageAbout.Add(this.SVMClassifierImage);
-		global::Gtk.Fixed.FixedChild w104 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMClassifierImage]));
-		w104.X = 360;
-		w104.Y = 40;
+		global::Gtk.Fixed.FixedChild w106 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMClassifierImage]));
+		w106.X = 360;
+		w106.Y = 40;
 		// Container child LayoutPageAbout.Gtk.Fixed+FixedChild
 		this.SVMDecisionBoundaryCaption = new global::Gtk.Label();
 		this.SVMDecisionBoundaryCaption.Name = "SVMDecisionBoundaryCaption";
 		this.SVMDecisionBoundaryCaption.LabelProp = global::Mono.Unix.Catalog.GetString("SVM decision boundary");
 		this.LayoutPageAbout.Add(this.SVMDecisionBoundaryCaption);
-		global::Gtk.Fixed.FixedChild w105 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMDecisionBoundaryCaption]));
-		w105.X = 360;
-		w105.Y = 390;
+		global::Gtk.Fixed.FixedChild w107 = ((global::Gtk.Fixed.FixedChild)(this.LayoutPageAbout[this.SVMDecisionBoundaryCaption]));
+		w107.X = 360;
+		w107.Y = 390;
 		this.MainNotebook.Add(this.LayoutPageAbout);
-		global::Gtk.Notebook.NotebookChild w106 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageAbout]));
-		w106.Position = 4;
+		global::Gtk.Notebook.NotebookChild w108 = ((global::Gtk.Notebook.NotebookChild)(this.MainNotebook[this.LayoutPageAbout]));
+		w108.Position = 4;
 		// Notebook tab
 		this.LabelPageAbout = new global::Gtk.Label();
 		this.LabelPageAbout.Name = "LabelPageAbout";
@@ -1266,16 +1287,15 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.MainNotebook.SetTabLabel(this.LayoutPageAbout, this.LabelPageAbout);
 		this.LabelPageAbout.ShowAll();
 		this.MainLayout.Add(this.MainNotebook);
-		global::Gtk.Fixed.FixedChild w107 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.MainNotebook]));
-		w107.X = 20;
-		w107.Y = 70;
+		global::Gtk.Fixed.FixedChild w109 = ((global::Gtk.Fixed.FixedChild)(this.MainLayout[this.MainNotebook]));
+		w109.X = 20;
+		w109.Y = 70;
 		this.Add(this.MainLayout);
 		if ((this.Child != null))
 		{
 			this.Child.ShowAll();
 		}
 		this.Show();
-		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
 		this.AboutButton.Activated += new global::System.EventHandler(this.OnAboutButtonClicked);
 		this.QuitButton.Activated += new global::System.EventHandler(this.OnQuitButtonClicked);
 		this.RunButton.Activated += new global::System.EventHandler(this.OnRunButtonClicked);
@@ -1297,7 +1317,7 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 		this.KernelBox.Changed += new global::System.EventHandler(this.OnKernelBoxChanged);
 		this.ModelBox.Changed += new global::System.EventHandler(this.OnModelBoxChanged);
 		this.TrainedParametersBox.Changed += new global::System.EventHandler(this.OnTrainedParametersBoxChanged);
-		this.SaveTrainedModelButton.Clicked += new global::System.EventHandler(this.OnSaveTrainedModelButton);
+		this.SaveTrainedModelButton.Clicked += new global::System.EventHandler(this.OnSaveModelButtonClicked);
 		this.OpenTrainedModelButton.Clicked += new global::System.EventHandler(this.OnOpenTrainedModelButtonClicked);
 		this.TrainedModelBox.Changed += new global::System.EventHandler(this.OnTrainedModelBoxChanged);
 	}

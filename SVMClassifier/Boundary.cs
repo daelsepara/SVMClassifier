@@ -96,6 +96,16 @@ namespace SupportVectorMachine
 
 			Points(pixbuf, x, classification, f1, f2);
 
+			// Plot bounding box
+			var cw = ContourGraph.Width - 1;
+			var ch = ContourGraph.Height;
+			var border = new Color(128, 128, 128);
+
+			Common.Line(pixbuf, 0, 1, cw, 1, border);
+			Common.Line(pixbuf, cw, 1, cw, ch, border);
+			Common.Line(pixbuf, 0, ch, cw, ch, border);
+			Common.Line(pixbuf, 0, 1, 0, ch, border);
+
 			ManagedOps.Free(classification);
 		}
 
@@ -220,13 +230,14 @@ namespace SupportVectorMachine
 
 			var border = new Color(128, 128, 128);
 
+			// Plot bounding box
 			var cw = ContourGraph.Width - 1;
 			var ch = ContourGraph.Height;
 
-			Common.Line(ContourGraph, 0, 0, cw, 0, border);
-			Common.Line(ContourGraph, cw, 0, cw, ch, border);
+			Common.Line(ContourGraph, 0, 1, cw, 1, border);
+			Common.Line(ContourGraph, cw, 1, cw, ch, border);
 			Common.Line(ContourGraph, 0, ch, cw, ch, border);
-			Common.Line(ContourGraph, 0, 0, 0, ch, border);
+			Common.Line(ContourGraph, 0, 1, 0, ch, border);
 
 			return ContourGraph;
 		}
