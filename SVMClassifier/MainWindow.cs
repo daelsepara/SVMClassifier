@@ -1113,38 +1113,40 @@ public partial class MainWindow : Gtk.Window
 		{
 			ClassificationView.Buffer.Clear();
 
-			string text = "";
+			var prediction = new ManagedArray(1, TestData.y);
+			var classification = new ManagedIntList(TestData.y);
 
-			var input = new ManagedArray(TestData.x, 1);
+			for (int i = 0; i < classification.Length(); i++)
+				classification[i] = 0;
 
-			for (var i = 0; i < TestData.y; i++)
+			foreach (var model in Models)
 			{
-				ManagedOps.Copy2DOffsetReverse(input, TestData, 0, i);
+				var p = model.Predict(TestData);
 
-				var category = 0;
-
-				foreach (var model in Models)
+				for (var i = 0; i < p.Length(); i++)
 				{
-					if (model.Trained)
+					if (p[i] > prediction[i])
 					{
-						var c = model.Predict(input);
-
-						if (c[0] > 0)
-						{
-							category = model.Category;
-						}
-
-						ManagedOps.Free(c);
+						prediction[i] = p[i];
+						classification[i] = p[i] > 0.0 ? model.Category : 0;
 					}
 				}
 
+				ManagedOps.Free(p);
+			}
+
+			string text = "";
+
+			for (var i = 0; i < classification.x; i++)
+			{
 				if (i > 0)
 					text += "\n";
 
-				text += Convert.ToString(category, ci);
+				text += Convert.ToString(classification[i], ci);
 			}
 
-			ManagedOps.Free(input);
+			ManagedOps.Free(classification);
+			ManagedOps.Free(prediction);
 
 			ClassificationView.Buffer.Text = text;
 		}

@@ -207,7 +207,7 @@ namespace SupportVectorMachine
 
 				for (var yy = 0; yy < m; yy++)
 				{
-					E[i] += alpha[yy] * dy[yy] * K[i, yy];
+					E[i] += alpha[yy] * dy[yy] * K[yy, i];
 				}
 
 				E[i] -= dy[i];
@@ -229,7 +229,7 @@ namespace SupportVectorMachine
 
 					for (var yy = 0; yy < m; yy++)
 					{
-						E[j] += alpha[yy] * dy[yy] * K[j, yy];
+						E[j] += alpha[yy] * dy[yy] * K[yy, j];
 					}
 
 					E[j] -= dy[j];
