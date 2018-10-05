@@ -204,7 +204,14 @@ namespace SupportVectorMachine
 
 				for (var j = 0; j < height; j++)
 				{
-					data[j, i] = p[j];
+                    if (f1 < f2)
+					{
+						data[i, j] = p[j];
+					}
+					else
+					{
+						data[j, i] = p[j];
+					}
 				}
 
 				ManagedOps.Free(p);
