@@ -196,22 +196,15 @@ namespace SupportVectorMachine
 			{
 				for (var j = 0; j < height; j++)
 				{
-					xx[0, j] = xplot[i];
-					xx[1, j] = yplot[j];
+					xx[f1, j] = xplot[i];
+					xx[f2, j] = yplot[j];
 				}
 
 				var p = model.Predict(xx);
 
 				for (var j = 0; j < height; j++)
 				{
-                    if (f1 < f2)
-					{
-						data[i, j] = p[j];
-					}
-					else
-					{
-						data[j, i] = p[j];
-					}
+                    data[i, j] = p[j];
 				}
 
 				ManagedOps.Free(p);
