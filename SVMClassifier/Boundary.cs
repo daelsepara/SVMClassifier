@@ -221,7 +221,7 @@ namespace SupportVectorMachine
 			var border = new Color(128, 128, 128);
 
 			var cw = ContourGraph.Width - 1;
-			var ch = ContourGraph.Height - 1;
+			var ch = ContourGraph.Height;
 
 			Common.Line(ContourGraph, 0, 0, cw, 0, border);
 			Common.Line(ContourGraph, cw, 0, cw, ch, border);
