@@ -250,7 +250,7 @@ namespace SupportVectorMachine
 						H = Math.Min(C, C + alpha[j] - alpha[i]);
 					}
 
-					if (Math.Abs(L - H) <= Mepsilon)
+					if (Math.Abs(L - H) <= Double.Epsilon)
 					{
 						// continue to next i 
 						continue;

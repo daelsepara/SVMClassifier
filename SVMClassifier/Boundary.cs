@@ -171,6 +171,14 @@ namespace SupportVectorMachine
 			deltax = (maxx - minx) / width;
 			deltay = (maxy - miny) / height;
 
+			minx = minx - 8 * deltax;
+            maxx = maxx + 8 * deltax;
+            miny = miny - 8 * deltay;
+            maxy = maxy + 8 * deltay;
+
+            deltax = (maxx - minx) / width;
+            deltay = (maxy - miny) / height;
+
 			// For predict
 			for (var i = 0; i < width; i++)
 			{
@@ -183,7 +191,6 @@ namespace SupportVectorMachine
 			}
 
 			var xx = new ManagedArray(2, height);
-			var grid = new ManagedArray(width, height);
 
 			for (var i = 0; i < width; i++)
 			{
@@ -198,7 +205,6 @@ namespace SupportVectorMachine
 				for (var j = 0; j < height; j++)
 				{
 					data[j, i] = p[j];
-					grid[i, j] = p[j];
 				}
 
 				ManagedOps.Free(p);
@@ -210,7 +216,7 @@ namespace SupportVectorMachine
 
 			Plot(ContourGraph, x, model, f1, f2);
 
-			ManagedOps.Free(xx, grid);
+			ManagedOps.Free(xx);
 
 			return ContourGraph;
 		}
