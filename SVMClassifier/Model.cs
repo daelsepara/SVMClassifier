@@ -124,7 +124,7 @@ namespace SupportVectorMachine
 
 				ManagedOps.Free(tinput);
 			}
-			else if (kernel == KernelType.GAUSSIAN)
+			else if (kernel == KernelType.GAUSSIAN || kernel == KernelType.RADIAL)
 			{
 				// RBF Kernel
 				// This is equivalent to computing the kernel on every pair of examples
@@ -147,6 +147,9 @@ namespace SupportVectorMachine
 				var sigma = kparam.Length() > 0 ? kparam[0] : 1.0;
 
 				var g = Math.Abs(sigma) > 0.0 ? Math.Exp(-1.0 / (2.0 * sigma * sigma)) : 0.0;
+
+				if (Type == KernelType.RADIAL)
+					ManagedMatrix.Sqrt(tempK);
 
 				K = ManagedMatrix.Pow(g, tempK);
 
@@ -444,7 +447,7 @@ namespace SupportVectorMachine
 					ManagedMatrix.Multiply(predictions, x, W);
 					ManagedMatrix.Add(predictions, B);
 				}
-				else if (Type == KernelType.GAUSSIAN)
+				else if (Type == KernelType.GAUSSIAN || Type == KernelType.RADIAL)
 				{
 					// RBF Kernel
 					// This is equivalent to computing the kernel on every pair of examples
@@ -475,7 +478,11 @@ namespace SupportVectorMachine
 
 					var sigma = KernelParam.Length() > 0 ? KernelParam[0] : 1.0;
 
+					if (Type == KernelType.RADIAL)
+						ManagedMatrix.Sqrt(tempK);
+
 					var g = Math.Abs(sigma) > 0.0 ? Math.Exp(-1.0 / (2.0 * sigma * sigma)) : 0.0;
+
 					var Kernel = ManagedMatrix.Pow(g, tempK);
 
 					var tempY = new ManagedArray(Cols(tY), rows);

@@ -1341,7 +1341,7 @@ public partial class MainWindow : Gtk.Window
 
 		if (ClassifierInitialized && SetupTestData(test) && model.Trained)
 		{
-			var pixbuf = Boundary.Plot(TestData, model, PlotImage.WidthRequest, PlotImage.HeightRequest, f1, f2);
+			var pixbuf = Boundary.Contour(TestData, model, PlotImage.WidthRequest, PlotImage.HeightRequest, f1, f2);
 
 			if (pixbuf != null)
 			{

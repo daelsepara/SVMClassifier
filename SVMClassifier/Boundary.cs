@@ -172,12 +172,12 @@ namespace SupportVectorMachine
 			deltay = (maxy - miny) / height;
 
 			minx = minx - 8 * deltax;
-            maxx = maxx + 8 * deltax;
-            miny = miny - 8 * deltay;
-            maxy = maxy + 8 * deltay;
+			maxx = maxx + 8 * deltax;
+			miny = miny - 8 * deltay;
+			maxy = maxy + 8 * deltay;
 
-            deltax = (maxx - minx) / width;
-            deltay = (maxy - miny) / height;
+			deltax = (maxx - minx) / width;
+			deltay = (maxy - miny) / height;
 
 			// For predict
 			for (var i = 0; i < width; i++)
@@ -196,22 +196,15 @@ namespace SupportVectorMachine
 			{
 				for (var j = 0; j < height; j++)
 				{
-					xx[0, j] = xplot[i];
-					xx[1, j] = yplot[j];
+					xx[f1, j] = xplot[i];
+					xx[f2, j] = yplot[j];
 				}
 
 				var p = model.Predict(xx);
 
 				for (var j = 0; j < height; j++)
 				{
-                    if (f1 < f2)
-					{
-						data[i, j] = p[j];
-					}
-					else
-					{
-						data[j, i] = p[j];
-					}
+					data[i, j] = p[j];
 				}
 
 				ManagedOps.Free(p);
@@ -224,6 +217,16 @@ namespace SupportVectorMachine
 			Plot(ContourGraph, x, model, f1, f2);
 
 			ManagedOps.Free(xx);
+
+			var border = new Color(128, 128, 128);
+
+			var cw = ContourGraph.Width - 1;
+			var ch = ContourGraph.Height - 1;
+
+			Common.Line(ContourGraph, 0, 0, cw, 0, border);
+			Common.Line(ContourGraph, cw, 0, cw, ch, border);
+			Common.Line(ContourGraph, 0, ch, cw, ch, border);
+			Common.Line(ContourGraph, 0, 0, 0, ch, border);
 
 			return ContourGraph;
 		}

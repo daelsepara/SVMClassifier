@@ -574,5 +574,11 @@ namespace DeepLearnCS
 
 			return null;
 		}
+
+        public static void Sqrt(ManagedArray x)
+		{
+			for (var i = 0; i < x.Length(); i++)
+				x[i] = Math.Sqrt(x[i]);
+		}
 	}
 }
