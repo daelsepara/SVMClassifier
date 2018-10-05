@@ -85,6 +85,16 @@ namespace SupportVectorMachine
 
 			Points(pixbuf, x, classification, f1, f2);
 
+			// Plot bounding box
+			var cw = pixbuf.Width - 1;
+			var ch = pixbuf.Height;
+			var border = new Color(128, 128, 128);
+
+			Common.Line(pixbuf, 0, 1, cw, 1, border);
+			Common.Line(pixbuf, cw, 1, cw, ch, border);
+			Common.Line(pixbuf, 0, ch, cw, ch, border);
+			Common.Line(pixbuf, 0, 1, 0, ch, border);
+
 			ManagedOps.Free(classification);
 
 			return pixbuf;
@@ -95,16 +105,6 @@ namespace SupportVectorMachine
 			var classification = model.Classify(x);
 
 			Points(pixbuf, x, classification, f1, f2);
-
-			// Plot bounding box
-			var cw = ContourGraph.Width - 1;
-			var ch = ContourGraph.Height;
-			var border = new Color(128, 128, 128);
-
-			Common.Line(pixbuf, 0, 1, cw, 1, border);
-			Common.Line(pixbuf, cw, 1, cw, ch, border);
-			Common.Line(pixbuf, 0, ch, cw, ch, border);
-			Common.Line(pixbuf, 0, 1, 0, ch, border);
 
 			ManagedOps.Free(classification);
 		}

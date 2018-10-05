@@ -97,9 +97,10 @@ public partial class MainWindow : Gtk.Window
 		PlotType.PackStart(cell, false);
 		PlotType.AddAttribute(cell, "text", 0);
 		var store = new ListStore(typeof(string));
+
 		PlotType.Model = store;
 
-		store.AppendValues("Test data points");
+		store.AppendValues("Data points");
 		store.AppendValues("Decision boundaries");
 
 		PlotType.Active = 0;
@@ -662,64 +663,67 @@ public partial class MainWindow : Gtk.Window
 	{
 		var json = Utility.LoadJson(FileName);
 
-		var models = Utility.Deserialize(json, NormalizationData);
-
-		if (models.Count > 0)
+		if (!string.IsNullOrEmpty(json))
 		{
-			ResetModels();
+			var models = Utility.Deserialize(json, NormalizationData);
 
-			Models.AddRange(models);
-
-			DisableControls();
-
-			var categories = 0;
-			var features = 0;
-
-			foreach (var model in models)
+			if (models.Count > 0)
 			{
-				categories = model.Category > categories ? model.Category : categories;
-				features = model.ModelX.x > features ? model.ModelX.x : features;
-			}
+				ResetModels();
 
-			if (Models.Count > 0)
-			{
-				UpdateTrainedModels(TrainedModelBox, Models);
-				UpdateTrainedModels(ClassificationModelsBox, Models);
-				UpdateTrainedModels(PlotModelBox, Models);
+				Models.AddRange(models);
 
-				ResetModelKernels();
+				DisableControls();
 
-				foreach (var model in Models)
+				var categories = 0;
+				var features = 0;
+
+				foreach (var model in models)
 				{
-					var kclass = (int)model.Type;
-					var kparams = new List<double>();
-
-					for (var i = 0; i < model.KernelParam.Length(); i++)
-						kparams.Add(Convert.ToDouble(model.KernelParam[i], ci));
-
-					var kernel = new KernelClass(Kernels[kclass].Name, model.Type, kparams, Kernels[kclass].ParameterNames);
-
-					ModelKernels.Add(new ModelKernel(kernel, model.Category, model.C, model.Tolerance, model.MaxIterations));
+					categories = model.Category > categories ? model.Category : categories;
+					features = model.ModelX.x > features ? model.ModelX.x : features;
 				}
 
-				UpdateModelsBox(ModelBox, ModelKernels);
+				if (Models.Count > 0)
+				{
+					UpdateTrainedModels(TrainedModelBox, Models);
+					UpdateTrainedModels(ClassificationModelsBox, Models);
+					UpdateTrainedModels(PlotModelBox, Models);
+
+					ResetModelKernels();
+
+					foreach (var model in Models)
+					{
+						var kclass = (int)model.Type;
+						var kparams = new List<double>();
+
+						for (var i = 0; i < model.KernelParam.Length(); i++)
+							kparams.Add(Convert.ToDouble(model.KernelParam[i], ci));
+
+						var kernel = new KernelClass(Kernels[kclass].Name, model.Type, kparams, Kernels[kclass].ParameterNames);
+
+						ModelKernels.Add(new ModelKernel(kernel, model.Category, model.C, model.Tolerance, model.MaxIterations));
+					}
+
+					UpdateModelsBox(ModelBox, ModelKernels);
+				}
+
+				if (DelimiterBox.Active < 0)
+					DelimiterBox.Active = 0;
+
+				UpdateTextView(NormalizationView, NormalizationData);
+
+				Features.Value = features;
+				Categories.Value = categories;
+
+				ClassifierInitialized = true;
+				TrainingDone = true;
+
+				TrainingProgress.Text = "Pre-trained models";
+				TrainingProgress.Fraction = 1;
+
+				EnableControls();
 			}
-
-			if (DelimiterBox.Active < 0)
-				DelimiterBox.Active = 0;
-
-			UpdateTextView(NormalizationView, NormalizationData);
-
-			Features.Value = features;
-			Categories.Value = categories;
-
-			ClassifierInitialized = true;
-			TrainingDone = true;
-
-			TrainingProgress.Text = "Pre-trained models";
-			TrainingProgress.Fraction = 1;
-
-			EnableControls();
 		}
 	}
 

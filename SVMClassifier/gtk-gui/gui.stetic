@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <stetic-interface>
   <configuration>
     <images-root-path>..</images-root-path>
@@ -899,7 +899,7 @@
                     <property name="Icon">stock:gtk-save Menu</property>
                     <property name="Label" translatable="yes" />
                     <property name="FocusOnClick">False</property>
-                    <signal name="Clicked" handler="OnSaveModelButtonClicked" />
+                    <signal name="Clicked" handler="OnSaveTrainedModelButton" />
                   </widget>
                   <packing>
                     <property name="X">270</property>
