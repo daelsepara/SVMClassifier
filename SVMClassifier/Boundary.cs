@@ -37,7 +37,7 @@ namespace SupportVectorMachine
 						var xp = (int)((x[f1, i] - minx) / deltax);
 						var yp = (int)((x[f2, i] - miny) / deltay);
 
-						Common.Circle(pixbuf, xp, yp, 2, c[i] != 0 ? new Color(255, 0, 0) : new Color(0, 0, 255));
+						Common.Circle(pixbuf, xp, yp, 2, c[i] != 0 ? new Color(255, 0, 0) : new Color(0, 0, 255), true);
 					}
 				}
 			}
