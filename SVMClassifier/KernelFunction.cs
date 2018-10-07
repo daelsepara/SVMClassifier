@@ -78,7 +78,7 @@ namespace SupportVectorMachine
 			var b = k.Length() > 0 ? k[0] : 0.0;
 			var a = k.Length() > 1 ? k[1] : 1.0;
 
-			return Math.Pow(Multiply(x1, x2), a) + b;
+			return Math.Pow(Multiply(x1, x2) + b, a);
 		}
 
 		public static double Gaussian(ManagedArray x1, ManagedArray x2, ManagedArray k)
