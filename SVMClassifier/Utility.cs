@@ -35,6 +35,15 @@ public static class Utility
 		return output;
 	}
 
+	public static string Serialize(Model model, double[,] normalization)
+	{
+		var classifier = new Classifier(Convert(model), normalization);
+
+		string output = JsonConvert.SerializeObject(classifier);
+
+		return output;
+	}
+
 	public static ModelJSON Convert(Model model)
 	{
 		var json = new ModelJSON

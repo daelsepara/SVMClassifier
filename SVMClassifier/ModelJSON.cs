@@ -12,6 +12,16 @@ namespace SupportVectorMachine
 			Models = models;
 			Normalization = normalization;
 		}
+
+		public Classifier(ModelJSON model, double[,] normalization)
+		{
+			Models = new List<ModelJSON>
+			{
+				model
+			};
+
+			Normalization = normalization;
+		}
 	}
 
 	public class ModelJSON
