@@ -7,6 +7,11 @@ namespace SupportVectorMachine
 		public List<ModelJSON> Models;
 		public double[,] Normalization;
 
+		public Classifier()
+		{
+
+		}
+
 		public Classifier(List<ModelJSON> models, double[,] normalization)
 		{
 			Models = models;
