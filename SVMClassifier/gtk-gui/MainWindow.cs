@@ -310,7 +310,7 @@ public partial class MainWindow
 		this.MainNotebook.WidthRequest = 740;
 		this.MainNotebook.HeightRequest = 510;
 		this.MainNotebook.Name = "MainNotebook";
-		this.MainNotebook.CurrentPage = 2;
+		this.MainNotebook.CurrentPage = 0;
 		// Container child MainNotebook.Gtk.Notebook+NotebookChild
 		this.LayoutPageData = new global::Gtk.Fixed();
 		this.LayoutPageData.Name = "LayoutPageData";
@@ -1296,6 +1296,7 @@ Wikipedia contributors, ""Support vector machine,"" Wikipedia, The Free Encyclop
 			this.Child.ShowAll();
 		}
 		this.Show();
+		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
 		this.AboutButton.Activated += new global::System.EventHandler(this.OnAboutButtonClicked);
 		this.QuitButton.Activated += new global::System.EventHandler(this.OnQuitButtonClicked);
 		this.RunButton.Activated += new global::System.EventHandler(this.OnRunButtonClicked);

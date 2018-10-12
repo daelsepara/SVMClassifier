@@ -109,6 +109,7 @@
     <property name="Resizable">False</property>
     <property name="DefaultWidth">800</property>
     <property name="DefaultHeight">600</property>
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
       <widget class="Gtk.Fixed" id="MainLayout">
         <property name="MemberName" />
