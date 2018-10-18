@@ -8,11 +8,11 @@ namespace SVMClassifier
         {
             Application.Init();
 
-			MainWindow win = new MainWindow();
-            
-			win.Show();
-            
-			Application.Run();
+            MainWindow win = new MainWindow();
+
+            win.Show();
+
+            Application.Run();
         }
     }
 }

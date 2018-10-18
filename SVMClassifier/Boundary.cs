@@ -6,245 +6,245 @@ using System.Collections.Generic;
 
 namespace SupportVectorMachine
 {
-	public static class Boundary
-	{
-		static double deltax;
-		static double deltay;
-		static double minx, maxx;
-		static double miny, maxy;
+    public static class Boundary
+    {
+        static double deltax;
+        static double deltay;
+        static double minx, maxx;
+        static double miny, maxy;
 
-		static int Rows(ManagedArray x)
-		{
-			return x.y;
-		}
+        static int Rows(ManagedArray x)
+        {
+            return x.y;
+        }
 
-		static int Cols(ManagedArray x)
-		{
-			return x.x;
-		}
+        static int Cols(ManagedArray x)
+        {
+            return x.x;
+        }
 
-		public static void Points(Pixbuf pixbuf, ManagedArray x, ManagedIntList c, int f1 = 0, int f2 = 0)
-		{
-			f1 = f1 >= 0 && f1 < Cols(x) ? f1 : 0;
-			f2 = f2 >= 0 && f2 < Cols(x) ? f2 : 0;
+        public static void Points(Pixbuf pixbuf, ManagedArray x, ManagedIntList c, int f1 = 0, int f2 = 0)
+        {
+            f1 = f1 >= 0 && f1 < Cols(x) ? f1 : 0;
+            f2 = f2 >= 0 && f2 < Cols(x) ? f2 : 0;
 
-			if (pixbuf != null)
-			{
-				for (var i = 0; i < Rows(x); i++)
-				{
-					if (Math.Abs(deltax) > 0 && Math.Abs(deltay) > 0)
-					{
-						var xp = (int)((x[f1, i] - minx) / deltax);
-						var yp = (int)((x[f2, i] - miny) / deltay);
+            if (pixbuf != null)
+            {
+                for (var i = 0; i < Rows(x); i++)
+                {
+                    if (Math.Abs(deltax) > 0 && Math.Abs(deltay) > 0)
+                    {
+                        var xp = (int)((x[f1, i] - minx) / deltax);
+                        var yp = (int)((x[f2, i] - miny) / deltay);
 
-						Common.Circle(pixbuf, xp, yp, 2, c[i] != 0 ? new Color(255, 0, 0) : new Color(0, 0, 255), true);
-					}
-				}
-			}
-		}
+                        Common.Circle(pixbuf, xp, yp, 2, c[i] != 0 ? new Color(255, 0, 0) : new Color(0, 0, 255), true);
+                    }
+                }
+            }
+        }
 
-		public static Pixbuf Plot(ManagedArray x, Model model, int width, int height, int f1 = 0, int f2 = 1)
-		{
-			var pixbuf = Common.Pixbuf(width, height, new Color(255, 255, 255));
+        public static Pixbuf Plot(ManagedArray x, Model model, int width, int height, int f1 = 0, int f2 = 1)
+        {
+            var pixbuf = Common.Pixbuf(width, height, new Color(255, 255, 255));
 
-			var m = Rows(x);
+            var m = Rows(x);
 
-			var xplot = new double[width];
-			var yplot = new double[height];
+            var xplot = new double[width];
+            var yplot = new double[height];
 
-			minx = Double.MaxValue;
-			maxx = Double.MinValue;
+            minx = Double.MaxValue;
+            maxx = Double.MinValue;
 
-			miny = Double.MaxValue;
-			maxy = Double.MinValue;
+            miny = Double.MaxValue;
+            maxy = Double.MinValue;
 
-			f1 = f1 >= 0 && f1 < Cols(x) ? f1 : 0;
-			f2 = f2 >= 0 && f2 < Cols(x) ? f2 : 0;
+            f1 = f1 >= 0 && f1 < Cols(x) ? f1 : 0;
+            f2 = f2 >= 0 && f2 < Cols(x) ? f2 : 0;
 
-			for (var j = 0; j < m; j++)
-			{
-				minx = Math.Min(x[f1, j], minx);
-				maxx = Math.Max(x[f1, j], maxx);
+            for (var j = 0; j < m; j++)
+            {
+                minx = Math.Min(x[f1, j], minx);
+                maxx = Math.Max(x[f1, j], maxx);
 
-				miny = Math.Min(x[f2, j], miny);
-				maxy = Math.Max(x[f2, j], maxy);
-			}
+                miny = Math.Min(x[f2, j], miny);
+                maxy = Math.Max(x[f2, j], maxy);
+            }
 
-			deltax = (maxx - minx) / width;
-			deltay = (maxy - miny) / height;
+            deltax = (maxx - minx) / width;
+            deltay = (maxy - miny) / height;
 
-			minx = minx - 8 * deltax;
-			maxx = maxx + 8 * deltax;
-			miny = miny - 8 * deltay;
-			maxy = maxy + 8 * deltay;
+            minx = minx - 8 * deltax;
+            maxx = maxx + 8 * deltax;
+            miny = miny - 8 * deltay;
+            maxy = maxy + 8 * deltay;
 
-			deltax = (maxx - minx) / width;
-			deltay = (maxy - miny) / height;
+            deltax = (maxx - minx) / width;
+            deltay = (maxy - miny) / height;
 
-			var classification = model.Classify(x);
+            var classification = model.Classify(x);
 
-			Points(pixbuf, x, classification, f1, f2);
+            Points(pixbuf, x, classification, f1, f2);
 
-			// Plot bounding box
-			var cw = pixbuf.Width - 1;
-			var ch = pixbuf.Height;
-			var border = new Color(128, 128, 128);
+            // Plot bounding box
+            var cw = pixbuf.Width - 1;
+            var ch = pixbuf.Height;
+            var border = new Color(128, 128, 128);
 
-			Common.Line(pixbuf, 0, 1, cw, 1, border);
-			Common.Line(pixbuf, cw, 1, cw, ch, border);
-			Common.Line(pixbuf, 0, ch, cw, ch, border);
-			Common.Line(pixbuf, 0, 1, 0, ch, border);
+            Common.Line(pixbuf, 0, 1, cw, 1, border);
+            Common.Line(pixbuf, cw, 1, cw, ch, border);
+            Common.Line(pixbuf, 0, ch, cw, ch, border);
+            Common.Line(pixbuf, 0, 1, 0, ch, border);
 
-			ManagedOps.Free(classification);
+            ManagedOps.Free(classification);
 
-			return pixbuf;
-		}
+            return pixbuf;
+        }
 
-		public static void Plot(Pixbuf pixbuf, ManagedArray x, Model model, int f1 = 0, int f2 = 1)
-		{
-			var classification = model.Classify(x);
+        public static void Plot(Pixbuf pixbuf, ManagedArray x, Model model, int f1 = 0, int f2 = 1)
+        {
+            var classification = model.Classify(x);
 
-			Points(pixbuf, x, classification, f1, f2);
+            Points(pixbuf, x, classification, f1, f2);
 
-			ManagedOps.Free(classification);
-		}
+            ManagedOps.Free(classification);
+        }
 
-		static Pixbuf ContourGraph;
-		static List<Color> Colors = new List<Color>();
+        static Pixbuf ContourGraph;
+        static List<Color> Colors = new List<Color>();
 
-		public static void InitializeContour(int zlevels, int width, int height)
-		{
-			if (ContourGraph != null)
-				Common.Free(ContourGraph);
+        public static void InitializeContour(int zlevels, int width, int height)
+        {
+            if (ContourGraph != null)
+                Common.Free(ContourGraph);
 
-			ContourGraph = Common.Pixbuf(width, height, new Color(255, 255, 255));
+            ContourGraph = Common.Pixbuf(width, height, new Color(255, 255, 255));
 
-			Colors.Clear();
+            Colors.Clear();
 
-			if (zlevels > 0)
-				Colors.Add(new Color(0, 0, 255));
+            if (zlevels > 0)
+                Colors.Add(new Color(0, 0, 255));
 
-			if (zlevels > 1)
-				Colors.Add(new Color(0, 255, 0));
+            if (zlevels > 1)
+                Colors.Add(new Color(0, 255, 0));
 
-			if (zlevels > 2)
-				Colors.Add(new Color(255, 0, 0));
-		}
+            if (zlevels > 2)
+                Colors.Add(new Color(255, 0, 0));
+        }
 
-		public static void ContourLine(double x1, double y1, double x2, double y2, double z)
-		{
-			if (ContourGraph != null)
-			{
-				if (Math.Abs(deltax) > 0 && Math.Abs(deltay) > 0)
-				{
-					var xs = (int)((x1 - minx) / deltax);
-					var ys = (int)((y1 - miny) / deltay);
-					var xe = (int)((x2 - minx) / deltax);
-					var ye = (int)((y2 - miny) / deltay);
+        public static void ContourLine(double x1, double y1, double x2, double y2, double z)
+        {
+            if (ContourGraph != null)
+            {
+                if (Math.Abs(deltax) > 0 && Math.Abs(deltay) > 0)
+                {
+                    var xs = (int)((x1 - minx) / deltax);
+                    var ys = (int)((y1 - miny) / deltay);
+                    var xe = (int)((x2 - minx) / deltax);
+                    var ye = (int)((y2 - miny) / deltay);
 
-					var c = (int)z + 1;
+                    var c = (int)z + 1;
 
-					if (c >= 0 && c < Colors.Count)
-						Common.Line(ContourGraph, xs, ys, xe, ye, Colors[c]);
-				}
-			}
-		}
+                    if (c >= 0 && c < Colors.Count)
+                        Common.Line(ContourGraph, xs, ys, xe, ye, Colors[c]);
+                }
+            }
+        }
 
-		public static Pixbuf Contour(ManagedArray x, Model model, int width, int height, int f1 = 0, int f2 = 1)
-		{
-			InitializeContour(3, width, height);
+        public static Pixbuf Contour(ManagedArray x, Model model, int width, int height, int f1 = 0, int f2 = 1)
+        {
+            InitializeContour(3, width, height);
 
-			var m = Rows(x);
+            var m = Rows(x);
 
-			var xplot = new double[width];
-			var yplot = new double[height];
-			var data = new double[height, width];
+            var xplot = new double[width];
+            var yplot = new double[height];
+            var data = new double[height, width];
 
-			minx = Double.MaxValue;
-			maxx = Double.MinValue;
+            minx = Double.MaxValue;
+            maxx = Double.MinValue;
 
-			miny = Double.MaxValue;
-			maxy = Double.MinValue;
+            miny = Double.MaxValue;
+            maxy = Double.MinValue;
 
-			f1 = f1 >= 0 && f1 < Cols(x) ? f1 : 0;
-			f2 = f2 >= 0 && f2 < Cols(x) ? f2 : 0;
+            f1 = f1 >= 0 && f1 < Cols(x) ? f1 : 0;
+            f2 = f2 >= 0 && f2 < Cols(x) ? f2 : 0;
 
-			for (var j = 0; j < m; j++)
-			{
-				minx = Math.Min(x[f1, j], minx);
-				maxx = Math.Max(x[f1, j], maxx);
+            for (var j = 0; j < m; j++)
+            {
+                minx = Math.Min(x[f1, j], minx);
+                maxx = Math.Max(x[f1, j], maxx);
 
-				miny = Math.Min(x[f2, j], miny);
-				maxy = Math.Max(x[f2, j], maxy);
-			}
+                miny = Math.Min(x[f2, j], miny);
+                maxy = Math.Max(x[f2, j], maxy);
+            }
 
-			deltax = (maxx - minx) / width;
-			deltay = (maxy - miny) / height;
+            deltax = (maxx - minx) / width;
+            deltay = (maxy - miny) / height;
 
-			minx = minx - 8 * deltax;
-			maxx = maxx + 8 * deltax;
-			miny = miny - 8 * deltay;
-			maxy = maxy + 8 * deltay;
+            minx = minx - 8 * deltax;
+            maxx = maxx + 8 * deltax;
+            miny = miny - 8 * deltay;
+            maxy = maxy + 8 * deltay;
 
-			deltax = (maxx - minx) / width;
-			deltay = (maxy - miny) / height;
+            deltax = (maxx - minx) / width;
+            deltay = (maxy - miny) / height;
 
-			// For predict
-			for (var i = 0; i < width; i++)
-			{
-				xplot[i] = minx + i * deltax;
-			}
+            // For predict
+            for (var i = 0; i < width; i++)
+            {
+                xplot[i] = minx + i * deltax;
+            }
 
-			for (var i = 0; i < height; i++)
-			{
-				yplot[i] = miny + i * deltay;
-			}
+            for (var i = 0; i < height; i++)
+            {
+                yplot[i] = miny + i * deltay;
+            }
 
-			var xx = new ManagedArray(2, height);
+            var xx = new ManagedArray(2, height);
 
-			for (var i = 0; i < width; i++)
-			{
-				for (var j = 0; j < height; j++)
-				{
-					xx[f1, j] = xplot[i];
-					xx[f2, j] = yplot[j];
-				}
+            for (var i = 0; i < width; i++)
+            {
+                for (var j = 0; j < height; j++)
+                {
+                    xx[f1, j] = xplot[i];
+                    xx[f2, j] = yplot[j];
+                }
 
-				var p = model.Predict(xx);
+                var p = model.Predict(xx);
 
-				for (var j = 0; j < height; j++)
-				{
-					data[i, j] = p[j];
-				}
+                for (var j = 0; j < height; j++)
+                {
+                    data[i, j] = p[j];
+                }
 
-				ManagedOps.Free(p);
-			}
+                ManagedOps.Free(p);
+            }
 
-			var z = new double[] { -1, 0, 1 };
+            var z = new double[] { -1, 0, 1 };
 
-			Conrec.Contour(data, xplot, yplot, z, ContourLine);
+            Conrec.Contour(data, xplot, yplot, z, ContourLine);
 
-			Plot(ContourGraph, x, model, f1, f2);
+            Plot(ContourGraph, x, model, f1, f2);
 
-			ManagedOps.Free(xx);
+            ManagedOps.Free(xx);
 
-			var border = new Color(128, 128, 128);
+            var border = new Color(128, 128, 128);
 
-			// Plot bounding box
-			var cw = ContourGraph.Width - 1;
-			var ch = ContourGraph.Height;
+            // Plot bounding box
+            var cw = ContourGraph.Width - 1;
+            var ch = ContourGraph.Height;
 
-			Common.Line(ContourGraph, 0, 1, cw, 1, border);
-			Common.Line(ContourGraph, cw, 1, cw, ch, border);
-			Common.Line(ContourGraph, 0, ch, cw, ch, border);
-			Common.Line(ContourGraph, 0, 1, 0, ch, border);
+            Common.Line(ContourGraph, 0, 1, cw, 1, border);
+            Common.Line(ContourGraph, cw, 1, cw, ch, border);
+            Common.Line(ContourGraph, 0, ch, cw, ch, border);
+            Common.Line(ContourGraph, 0, 1, 0, ch, border);
 
-			return ContourGraph;
-		}
+            return ContourGraph;
+        }
 
-		public static void Free()
-		{
-			Common.Free(ContourGraph);
-		}
-	}
+        public static void Free()
+        {
+            Common.Free(ContourGraph);
+        }
+    }
 }
