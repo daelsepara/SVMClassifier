@@ -49,9 +49,6 @@ namespace SupportVectorMachine
 
             var m = Rows(x);
 
-            var xplot = new double[width];
-            var yplot = new double[height];
-
             minx = Double.MaxValue;
             maxx = Double.MinValue;
 

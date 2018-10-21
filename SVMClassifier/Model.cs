@@ -31,8 +31,6 @@ namespace SupportVectorMachine
 
         Random random = new Random(Guid.NewGuid().GetHashCode());
 
-        readonly double Mepsilon = Math.Pow(2, -52);
-
         // Internal variables
         ManagedArray K;
         ManagedArray E;
