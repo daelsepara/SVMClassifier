@@ -72,7 +72,7 @@ namespace SupportVectorMachine
             return x.x;
         }
 
-        public void Setup(ManagedArray x, ManagedArray y, double c, KernelType kernel, ManagedArray param, double tolerance = (double)1 / 1000, int maxpasses = 5, int category = 1)
+        public void Setup(ManagedArray x, ManagedArray y, double c, KernelType kernel, ManagedArray param, double tolerance = 0.001, int maxpasses = 5, int category = 1)
         {
             ManagedOps.Free(dx, dy);
             dx = new ManagedArray(x);
@@ -399,7 +399,7 @@ namespace SupportVectorMachine
         // Converted to R by: SD Separa (2016/03/18)
         // Converted to C# by: SD Separa (2018/09/29)
         //
-        public void Train(ManagedArray x, ManagedArray y, double c, KernelType kernel, ManagedArray param, double tolerance = (double)1 / 1000, int maxpasses = 5, int category = 1)
+        public void Train(ManagedArray x, ManagedArray y, double c, KernelType kernel, ManagedArray param, double tolerance = 0.001, int maxpasses = 5, int category = 1)
         {
             Setup(x, y, c, kernel, param, tolerance, maxpasses, category);
 

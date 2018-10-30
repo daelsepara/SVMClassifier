@@ -121,11 +121,11 @@ namespace SupportVectorMachine
 
             for (var i = 0; i < x1.Length(); i++)
             {
-                z[i] = Math.Sin(m + (double)1 / 2) * 2;
+                z[i] = Math.Sin(m + 0.5) * 2;
 
                 var d = x1[i] - x2[i];
 
-                z[i] = Math.Abs(d) > 0 ? Math.Sin(m + (double)1 / 2) * d / Math.Sin(d * (double)1 / 2) : z[i];
+                z[i] = Math.Abs(d) > 0 ? Math.Sin(m + 0.5) * d / Math.Sin(d * 0.5) : z[i];
 
                 prod = (i == 0) ? z[i] : prod * z[i];
             }
