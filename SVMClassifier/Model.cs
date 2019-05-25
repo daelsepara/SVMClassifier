@@ -462,7 +462,7 @@ namespace SupportVectorMachine
                     var rows = Rows(X1);
                     var cols = Cols(X2);
 
-                    var tempK = new ManagedArray(rows, cols);
+                    var tempK = new ManagedArray(cols, rows);
                     var temp1 = new ManagedArray(cols, rows);
                     var temp2 = ManagedMatrix.Multiply(x, tX);
 

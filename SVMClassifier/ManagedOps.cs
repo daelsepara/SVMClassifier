@@ -14,6 +14,12 @@ namespace DeepLearnCS
                 dst[i] = value;
         }
 
+        public static void Set(ManagedIntList dst, int value)
+        {
+            for (var i = 0; i < dst.Length(); i++)
+                dst[i] = value;
+        }
+
         // Copy 2D[minx + x][miny + y]
         public static void Copy2D(ManagedArray dst, ManagedArray src, int minx, int miny)
         {
