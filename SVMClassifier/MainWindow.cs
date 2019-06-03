@@ -1382,6 +1382,7 @@ public partial class MainWindow : Gtk.Window
 
         if (ClassifierInitialized && SetupTestData(test) && model.Trained && type >= 0 && type < 2)
         {
+            Plotting = true;
             ToggleUserControls(false);
             PauseButton.Sensitive = false;
 
@@ -1416,6 +1417,7 @@ public partial class MainWindow : Gtk.Window
             }
 
             ToggleUserControls(true);
+            Plotting = false;
         }
     }
 
