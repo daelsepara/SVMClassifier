@@ -38,6 +38,8 @@ public partial class MainWindow : Gtk.Window
 
     bool ClassifierInitialized;
 
+    bool Plotting = false;
+
     string FileName;
 
     enum Pages
@@ -1361,7 +1363,15 @@ public partial class MainWindow : Gtk.Window
         EnableControls();
     }
 
-    protected void PlotModels(Model model, int f1 = 0, int f2 = 1)
+    protected async void Plot(Model model, int f1 = 0, int f2 = 1)
+    {
+        if (!Plotting)
+        {
+            await System.Threading.Tasks.Task.Run(() => PlotModels(model, f1, f2));
+        }
+    }
+
+    protected async System.Threading.Tasks.Task PlotModels(Model model, int f1 = 0, int f2 = 1)
     {
         var test = TestView.Buffer.Text.Trim();
 
@@ -1372,6 +1382,9 @@ public partial class MainWindow : Gtk.Window
 
         if (ClassifierInitialized && SetupTestData(test) && model.Trained && type >= 0 && type < 2)
         {
+            ToggleUserControls(false);
+            PauseButton.Sensitive = false;
+
             Pixbuf pixbuf;
 
             switch (type)
@@ -1401,6 +1414,8 @@ public partial class MainWindow : Gtk.Window
 
                 Common.Free(pixbuf);
             }
+
+            ToggleUserControls(true);
         }
     }
 
@@ -1894,11 +1909,10 @@ public partial class MainWindow : Gtk.Window
 
         if (model >= 0 && model < Models.Count && feature1 >= 0 && feature1 < features && feature2 >= 0 && feature2 < features && feature1 != feature2)
         {
-            ToggleUserControls(false);
-
-            PlotModels(Models[model], feature1, feature2);
-
-            ToggleUserControls(true);
+            if (!Plotting)
+            {
+                Plot(Models[model], feature1, feature2);
+            }
         }
     }
 
